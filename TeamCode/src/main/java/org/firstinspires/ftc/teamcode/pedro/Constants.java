@@ -1,12 +1,15 @@
 package org.firstinspires.ftc.teamcode.pedro;
-
+import com.pedropathing.follower.FollowerConstants;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.revhub.drivetrains.MecanumConfig;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
+import com.pedropathing.paths.PathConstraints;
+import com.pedropathing.ftc.FollowerBuilder;
 public class Constants {
 
+    //public static FollowerConstants followerConstants = new FollowerConstants()
+    //    .mass(10);
 
 
     public static MecanumConfig driveConfig = new MecanumConfig(
@@ -24,12 +27,15 @@ public class Constants {
     );
 
 
-    //public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 67);
+    public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 67);
 
 
     public static Follower create(HardwareMap h) {
+        return new FollowerBuilder(followerConstants, h)
+                .mecanumDrivetrain(driveConfig)
+                .pathConstraints(pathConstraints)
+                .build();
 
 
-        return null;
     }
 }
