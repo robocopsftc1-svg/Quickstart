@@ -8,8 +8,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Constants {
 
 
-    public static FollowerConstants followerConstants = new FollowerConstants()
-            .mass(10);
 
     public static MecanumConfig driveConfig = new MecanumConfig(
             c -> {
@@ -26,13 +24,12 @@ public class Constants {
     );
 
 
-    public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 67);
+    //public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 67);
 
 
     public static Follower create(HardwareMap h) {
-        .pathConstraints(pathConstraints)
-        .mecanumDrivetrain(driveConfig)
-        .build();
+
+
         return null;
     }
 }
