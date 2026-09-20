@@ -15,8 +15,9 @@ import  com.pedropathing.controllers.Controller;
 
 public class Constants {
 
-    //public static FollowerConstants followerConstants = new FollowerConstants()
-    //    .mass(10);
+    //no need for mass input
+    //constants.java is split between foresight: the algorithm,our drivetrain config and localization/odometry config
+    //once autotuner is done it'll give us copy and paste values here and we'll be good to go
 
 
     public static MecanumConfig driveConfig = new MecanumConfig(
