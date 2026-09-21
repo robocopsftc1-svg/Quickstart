@@ -20,20 +20,18 @@ public class Constants {
     //once autotuner is done it'll give us copy and paste values here and we'll be good to go
 
 
-    public static MecanumConfig driveConfig = new MecanumConfig(
-            c -> {
-                c.frontLeftName.set("left_front");
-                c.backLeftName.set("left_back");
-                c.frontRightName.set("right_front");
-                c.backRightName.set("right_back");
 
-                c.frontLeftDirection.set(DcMotorSimple.Direction.REVERSE);
-                c.backLeftDirection.set(DcMotorSimple.Direction.REVERSE);
-                c.frontRightDirection.set(DcMotorSimple.Direction.FORWARD);
-                c.backRightDirection.set(DcMotorSimple.Direction.FORWARD);
-            }
-    );
 
+    public static MecanumConfig drivetrainConfig = new MecanumConfig(c -> {
+        c.frontLeftName.set("left_front");
+        c.frontRightName.set("right_front");
+        c.backLeftName.set("left_back");
+        c.backRightName.set("right_back");
+        c.frontLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+        c.frontRightDirection.set(DcMotorSimple.Direction.FORWARD);
+        c.backLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+        c.backRightDirection.set(DcMotorSimple.Direction.FORWARD);
+    });
 
     //public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 67);
 

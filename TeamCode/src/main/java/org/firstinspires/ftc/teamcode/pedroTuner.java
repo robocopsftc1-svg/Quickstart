@@ -1,29 +1,20 @@
-package org.firstinspires.ftc.teamcode.pedro;
+package org.firstinspires.ftc.teamcode;
 
 import com.pedropathing.follower.Follower;
-import com.pedropathing.revhub.drivetrains.Mecanum;
-import com.pedropathing.revhub.localizers.PinpointLocalizer;
 import com.pedropathing.tuning.autotune.Procedure;
 import com.pedropathing.tuning.autotune.Tuner;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.pedro.procedures.MecanumTuner;
 import org.firstinspires.ftc.teamcode.pedro.procedures.PinpointTuner;
 
 
-import org.firstinspires.ftc.teamcode.pedro.procedures.ForesightTuner;
-import org.firstinspires.ftc.teamcode.pedro.procedures.MecanumTuner;
-import org.firstinspires.ftc.teamcode.pedro.procedures.PinpointTuner;
-import org.firstinspires.ftc.teamcode.pedro.procedures.TwoWheelTuner;
+@Autonomous(name="tune", group = "Autonomous")
+public class pedroTuner extends OpMode {
+    //private Follower follower;
 
-public class Tuning {
-
-
-
-    // Tuners go here
     @Tuner
     public static Procedure mecanumTuner() {
         return new MecanumTuner();
@@ -33,5 +24,14 @@ public class Tuning {
         return new PinpointTuner();
     }
 
+    @Override
+    public void init(){
+        //
+    }
+    @Override
+    public void loop(){
+        //
+
+    }
 
 }
