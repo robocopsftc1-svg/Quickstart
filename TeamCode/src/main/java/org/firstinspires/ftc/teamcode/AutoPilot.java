@@ -2,6 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 //import androidx.annotation.InterpolatorRes;
 
+import static org.firstinspires.ftc.teamcode.HardwareNames.INTAKE_LEFT;
+import static org.firstinspires.ftc.teamcode.HardwareNames.INTAKE_RIGHT;
+
 import com.pedropathing.follower.Follower;
 import com.pedropathing.math.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -17,6 +20,8 @@ import com.pedropathing.paths.interpolator.Interpolator;
 public class AutoPilot extends OpMode {
     private Follower follower;
     private Timer pathTimer, opModeTimer;
+
+
 
     public enum PathState {
         //START POSITION_END POSITION
@@ -90,6 +95,7 @@ public class AutoPilot extends OpMode {
     public void start() {
         opModeTimer.reset();
         setPathState(pathState);
+        //Intake thing = new Intake(INTAKE_LEFT, INTAKE_RIGHT);
     }
 
 
