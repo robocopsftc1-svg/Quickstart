@@ -28,7 +28,7 @@ public class Intake{
         left.setDirection(LEFT_DIRECTION);
         right.setDirection(RIGHT_DIRECTION);
 
-        for (DcMotor m: new DcMotor[]{left, right})
+        for (DcMotor m: new DcMotor[]{left, right})+
         {
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
             m.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
