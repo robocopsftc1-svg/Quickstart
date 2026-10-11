@@ -102,7 +102,7 @@ public class tele extends LinearOpMode {
         frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
         backRightDrive.setDirection(DcMotor.Direction.FORWARD);
 
-        Intake intake = new Intake(HardwareMap);
+        Intake intake = new Intake(hardwareMap);
         // Wait for the game to start (driver presses START)
         telemetry.addData("Status", "Initialized");
         telemetry.update();
