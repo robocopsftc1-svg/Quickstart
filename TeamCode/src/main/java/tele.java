@@ -36,6 +36,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Intake;
+import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 /*
  * This file contains an example of a Linear "OpMode".
@@ -186,7 +187,7 @@ public class tele extends LinearOpMode {
 //                intakeLeft.setPower(0);
 //                intakeRight.setPower(0);
 //            }
-            Follower follower = new Follower(hardwareMap);
+            follower = Constants.create(hardwareMap);
 
             follower.manual(axial, lateral, yaw);
             follower.update();
