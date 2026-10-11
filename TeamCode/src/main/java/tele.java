@@ -72,10 +72,10 @@ public class tele extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor frontLeftDrive = null;
-    private DcMotor backLeftDrive = null;
-    private DcMotor frontRightDrive = null;
-    private DcMotor backRightDrive = null;
+//    private DcMotor frontLeftDrive = null;
+//    private DcMotor backLeftDrive = null;
+//    private DcMotor frontRightDrive = null;
+//    private DcMotor backRightDrive = null;
     private DcMotor intakeLeft = null;
     private DcMotor intakeRight = null;
     private Follower follower;
@@ -85,10 +85,10 @@ public class tele extends LinearOpMode {
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
-        frontLeftDrive = hardwareMap.get(DcMotor.class, "left_front");
-        backLeftDrive = hardwareMap.get(DcMotor.class, "left_back");
-        frontRightDrive = hardwareMap.get(DcMotor.class, "right_front");
-        backRightDrive = hardwareMap.get(DcMotor.class, "right_back");
+//        frontLeftDrive = hardwareMap.get(DcMotor.class, "left_front");
+//        backLeftDrive = hardwareMap.get(DcMotor.class, "left_back");
+//        frontRightDrive = hardwareMap.get(DcMotor.class, "right_front");
+//        backRightDrive = hardwareMap.get(DcMotor.class, "right_back");
         intakeLeft = hardwareMap.get(DcMotor.class, "intake_left");
         intakeRight = hardwareMap.get(DcMotor.class, "intake_right");
         //follower = new Follower(hardwareMap);
@@ -102,10 +102,10 @@ public class tele extends LinearOpMode {
         // when you first test your robot, push the left joystick forward and observe the direction the wheels turn.
         // Reverse the direction (flip FORWARD <-> REVERSE ) of any wheel that runs backward
         // Keep testing until ALL the wheels move the robot forward when you push the left joystick forward.
-        frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
-        backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
-        frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
-        backRightDrive.setDirection(DcMotor.Direction.FORWARD);
+//        frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
+//        backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
+//        frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
+//        backRightDrive.setDirection(DcMotor.Direction.FORWARD);
 
         Intake intake = new Intake(hardwareMap);
         // Wait for the game to start (driver presses START)
@@ -186,6 +186,7 @@ public class tele extends LinearOpMode {
 //            else if((currentLeftPower >0 && currentRightPower > 0) || (currentLeftPower < 0 && currentRightPower < 0)){
 //                intakeLeft.setPower(0);
 //                intakeRight.setPower(0);
+
 //            }
             follower = Constants.create(hardwareMap);
 
