@@ -80,6 +80,10 @@ public class tele extends LinearOpMode {
     private DcMotor intakeRight = null;
     private Follower follower;
 
+    private double axial;  // Note: pushing stick forward gives negative value
+    private double lateral;
+    private double yaw;
+
     @Override
     public void runOpMode() {
 
@@ -120,9 +124,9 @@ public class tele extends LinearOpMode {
             double max;
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-            double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            double lateral =  gamepad1.left_stick_x;
-            double yaw     =  gamepad1.right_stick_x;
+            axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
+            lateral =  gamepad1.left_stick_x;
+            yaw     =  gamepad1.right_stick_x;
             boolean intakeCommand = gamepad1.a; //control intake
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
@@ -188,6 +192,13 @@ public class tele extends LinearOpMode {
 //                intakeRight.setPower(0);
 
 //            }
+
+
+
+
+
+
+
             follower = Constants.create(hardwareMap);
 
             follower.manual(axial, lateral, yaw);
@@ -218,4 +229,14 @@ public class tele extends LinearOpMode {
             telemetry.addData("intake command active? %s", String.valueOf(intakeCommand));
             telemetry.update();
         }
-    }}
+
+
+    }
+    public void manual(double a, double l, double y)
+    {
+        axial = a;
+        lateral = l;
+        yaw = y;
+    }
+
+}
