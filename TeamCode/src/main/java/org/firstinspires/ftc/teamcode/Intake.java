@@ -20,6 +20,7 @@ public class Intake{
     private final DcMotor right;
     private double power = 0.0;
 
+
     public Intake(HardwareMap hardwareMap)
     {
         left  = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_LEFT);

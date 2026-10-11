@@ -86,7 +86,7 @@ public class tele extends LinearOpMode {
         backLeftDrive = hardwareMap.get(DcMotor.class, "left_back");
         frontRightDrive = hardwareMap.get(DcMotor.class, "right_front");
         backRightDrive = hardwareMap.get(DcMotor.class, "right_back");
-
+        //intakeMotor = hardwareMap.get(DcMotor.class, "")
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
         // ########################################################################################
@@ -118,7 +118,7 @@ public class tele extends LinearOpMode {
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             double lateral =  gamepad1.left_stick_x;
             double yaw     =  gamepad1.right_stick_x;
-
+            boolean intakeCommand = gamepad1.a; //control intake
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
             double frontLeftPower  = axial + lateral + yaw;
@@ -169,6 +169,7 @@ public class tele extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", frontLeftPower, frontRightPower);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", backLeftPower, backRightPower);
+            telemetry.addData("intake command active? %s", String.valueOf(intakeCommand));
             telemetry.update();
         }
     }}
