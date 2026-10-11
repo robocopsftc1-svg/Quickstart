@@ -171,16 +171,28 @@ public class tele extends LinearOpMode {
 
 
 
-            if(intakeCommand && currentLeftPower==0 && currentRightPower==0){
-                //
+//            if(intakeCommand && currentLeftPower==0 && currentRightPower==0){
+//                //
+//                intakeLeft.setPower(intakeSuckPower);
+//                intakeRight.setPower(intakeSuckPower);
+//
+//            }
+//
+//
+//
+//            else if((currentLeftPower >0 && currentRightPower > 0) || (currentLeftPower < 0 && currentRightPower < 0)){
+//                intakeLeft.setPower(0);
+//                intakeRight.setPower(0);
+//            }
+            if(intakeCommand){
                 intakeLeft.setPower(intakeSuckPower);
                 intakeRight.setPower(intakeSuckPower);
-
             }
-
-
-
-            else if(currentLeftPower >0 && currentRightPower > 0){
+            else if(gamepad1.b){
+                intakeLeft.setPower(-intakeSuckPower);
+                intakeRight.setPower(-intakeSuckPower);
+            }
+            else{
                 intakeLeft.setPower(0);
                 intakeRight.setPower(0);
             }
