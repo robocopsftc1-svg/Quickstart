@@ -74,7 +74,8 @@ public class tele extends LinearOpMode {
     private DcMotor backLeftDrive = null;
     private DcMotor frontRightDrive = null;
     private DcMotor backRightDrive = null;
-
+    private DcMotor intakeLeft = null;
+    private DcMotor intakeRight = null;
 
 
     @Override
@@ -86,7 +87,8 @@ public class tele extends LinearOpMode {
         backLeftDrive = hardwareMap.get(DcMotor.class, "left_back");
         frontRightDrive = hardwareMap.get(DcMotor.class, "right_front");
         backRightDrive = hardwareMap.get(DcMotor.class, "right_back");
-        //intakeMotor = hardwareMap.get(DcMotor.class, "")
+        intakeLeft = hardwareMap.get(DcMotor.class, "intake_left");
+        intakeRight = hardwareMap.get(DcMotor.class, "intake_right");
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
         // ########################################################################################
@@ -125,7 +127,8 @@ public class tele extends LinearOpMode {
             double frontRightPower = axial - lateral - yaw;
             double backLeftPower   = axial - lateral + yaw;
             double backRightPower  = axial + lateral - yaw;
-
+            double intakeSuckPower = 0.8;
+            double intakeSpitPower = 0.2;
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
             max = Math.max(Math.abs(frontLeftPower), Math.abs(frontRightPower));
@@ -162,7 +165,25 @@ public class tele extends LinearOpMode {
             backLeftDrive.setPower(backLeftPower);
             backRightDrive.setPower(backRightPower);
 
+            //verify intake motor power
+            double currentLeftPower = intakeLeft.getPower();
+            double currentRightPower = intakeRight.getPower();
 
+
+
+            if(intakeCommand && currentLeftPower==0 && currentRightPower==0){
+                //
+                intakeLeft.setPower(intakeSuckPower);
+                intakeRight.setPower(intakeSuckPower);
+
+            }
+
+
+
+            else if(currentLeftPower >0 && currentRightPower > 0){
+                intakeLeft.setPower(0);
+                intakeRight.setPower(0);
+            }
 
 
             // Show the elapsed game time and wheel power.
