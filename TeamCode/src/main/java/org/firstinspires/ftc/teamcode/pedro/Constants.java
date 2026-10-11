@@ -41,12 +41,13 @@ public class Constants {
     public static PinpointConfig localizerConfig = new PinpointConfig(c -> {
         c.name.set("pinpoint");
         c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
-        c.xPodOffset.set(-2.5457436268723854);
-        c.yPodOffset.set(-2.243913665531189);
+        c.xPodOffset.set(-0.0);
+        c.yPodOffset.set(-0.0);
         c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
-        c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+        c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.REVERSED);
         c.globalDistanceUnit.set(DistanceUnit.INCH);
         c.offsetUnits.set(DistanceUnit.INCH);
+        //c.setDistanceUnit(DistanceUnit.INCH);
     });
 
     public static Follower create(HardwareMap h) {
