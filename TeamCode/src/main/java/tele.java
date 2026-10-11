@@ -27,6 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -76,7 +77,7 @@ public class tele extends LinearOpMode {
     private DcMotor backRightDrive = null;
     private DcMotor intakeLeft = null;
     private DcMotor intakeRight = null;
-
+    private Follower follower;
 
     @Override
     public void runOpMode() {
@@ -89,6 +90,7 @@ public class tele extends LinearOpMode {
         backRightDrive = hardwareMap.get(DcMotor.class, "right_back");
         intakeLeft = hardwareMap.get(DcMotor.class, "intake_left");
         intakeRight = hardwareMap.get(DcMotor.class, "intake_right");
+        //follower = new Follower(hardwareMap);
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
         // ########################################################################################
@@ -123,24 +125,24 @@ public class tele extends LinearOpMode {
             boolean intakeCommand = gamepad1.a; //control intake
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
-            double frontLeftPower  = axial + lateral + yaw;
-            double frontRightPower = axial - lateral - yaw;
-            double backLeftPower   = axial - lateral + yaw;
-            double backRightPower  = axial + lateral - yaw;
+//            double frontLeftPower  = axial + lateral + yaw;
+//            double frontRightPower = axial - lateral - yaw;
+//            double backLeftPower   = axial - lateral + yaw;
+//            double backRightPower  = axial + lateral - yaw;
             double intakeSuckPower = 0.8;
             double intakeSpitPower = 0.2;
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
-            max = Math.max(Math.abs(frontLeftPower), Math.abs(frontRightPower));
-            max = Math.max(max, Math.abs(backLeftPower));
-            max = Math.max(max, Math.abs(backRightPower));
-
-            if (max > 1.0) {
-                frontLeftPower  /= max;
-                frontRightPower /= max;
-                backLeftPower   /= max;
-                backRightPower  /= max;
-            }
+//            max = Math.max(Math.abs(frontLeftPower), Math.abs(frontRightPower));
+//            max = Math.max(max, Math.abs(backLeftPower));
+//            max = Math.max(max, Math.abs(backRightPower));
+//
+//            if (max > 1.0) {
+//                frontLeftPower  /= max;
+//                frontRightPower /= max;
+//                backLeftPower   /= max;
+//                backRightPower  /= max;
+//            }
 
             // This is test code:
             //
@@ -160,10 +162,10 @@ public class tele extends LinearOpMode {
             */
 
             // Send calculated power to wheels
-            frontLeftDrive.setPower(frontLeftPower);
-            frontRightDrive.setPower(frontRightPower);
-            backLeftDrive.setPower(backLeftPower);
-            backRightDrive.setPower(backRightPower);
+//            frontLeftDrive.setPower(frontLeftPower);
+//            frontRightDrive.setPower(frontRightPower);
+//            backLeftDrive.setPower(backLeftPower);
+//            backRightDrive.setPower(backRightPower);
 
             //verify intake motor power
             double currentLeftPower = intakeLeft.getPower();
@@ -184,6 +186,15 @@ public class tele extends LinearOpMode {
 //                intakeLeft.setPower(0);
 //                intakeRight.setPower(0);
 //            }
+            Follower follower = new Follower(hardwareMap);
+
+            follower.manual(axial, lateral, yaw);
+            follower.update();
+
+
+
+
+
             if(intakeCommand){
                 intakeLeft.setPower(intakeSuckPower);
                 intakeRight.setPower(intakeSuckPower);
@@ -200,8 +211,8 @@ public class tele extends LinearOpMode {
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Front left/Right", "%4.2f, %4.2f", frontLeftPower, frontRightPower);
-            telemetry.addData("Back  left/Right", "%4.2f, %4.2f", backLeftPower, backRightPower);
+            //telemetry.addData("Front left/Right", "%4.2f, %4.2f", frontLeftPower, frontRightPower);
+            //telemetry.addData("Back  left/Right", "%4.2f, %4.2f", backLeftPower, backRightPower);
             telemetry.addData("intake command active? %s", String.valueOf(intakeCommand));
             telemetry.update();
         }
