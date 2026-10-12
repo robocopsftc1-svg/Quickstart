@@ -80,6 +80,8 @@ public class tele extends LinearOpMode {
     private DcMotor intakeRight = null;
     private Follower follower;
 
+    private DcMotor shooter_driver = null;
+
     private double axial;  // Note: pushing stick forward gives negative value
     private double lateral;
     private double yaw;
