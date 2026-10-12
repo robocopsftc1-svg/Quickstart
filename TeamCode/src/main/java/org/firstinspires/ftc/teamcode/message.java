@@ -21,6 +21,8 @@ public class message extends LinearOpMode
     private boolean flowersWarned = false;
     private boolean finalWarned = false;
 
+    private DcMotor shooter_driver;
+
     private final ElapsedTime runtime = new ElapsedTime();
 
     private DcMotor frontLeft, backLeft, frontRight, backRight;
@@ -32,13 +34,15 @@ public class message extends LinearOpMode
         backLeft   = hardwareMap.get(DcMotor.class, HardwareNames.BACK_LEFT);
         frontRight = hardwareMap.get(DcMotor.class, HardwareNames.FRONT_RIGHT);
         backRight  = hardwareMap.get(DcMotor.class, HardwareNames.BACK_RIGHT);
-
+        shooter_driver = hardwareMap.get(DcMotor.class, HardwareNames.SHOOTER_DRIVER);
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
         backRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
+
+        shooter_driver.setDirection(DcMotorSimple.Direction.FORWARD);
         for (DcMotor m : new DcMotor[]{frontLeft, backLeft, frontRight, backRight}) {
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             m.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -98,6 +102,9 @@ public class message extends LinearOpMode
                 intake.stop();
             }
 
+            if(gamepad1.right_bumper){
+                shooter_driver.setPower(1);
+            }
 
 
             telemetry.addData("Time left", "%.0f s", Math.max(0, remaining));
