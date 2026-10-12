@@ -86,6 +86,7 @@ public class tele extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        follower = Constants.create(hardwareMap);
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
@@ -210,7 +211,6 @@ public class tele extends LinearOpMode {
 
 
 
-            follower = Constants.create(hardwareMap);
 
             follower.manual(axial, lateral, yaw);
             follower.update();
