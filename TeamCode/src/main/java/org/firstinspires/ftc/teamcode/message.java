@@ -103,7 +103,10 @@ public class message extends LinearOpMode
             }
 
             if(gamepad1.right_bumper){
-                shooter_driver.setPower(1);
+                shooter_driver.setPower(-1);
+            }
+            else{
+                shooter_driver.setPower(0);
             }
 
 
