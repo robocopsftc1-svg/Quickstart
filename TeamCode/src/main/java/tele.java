@@ -124,20 +124,20 @@ public class tele extends LinearOpMode {
             double max;
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-            if(-gamepad1.left_stick_y > 0 || -gamepad1.left_stick_y < 0){
-                //
-                axial = -gamepad1.left_stick_y;
-            }
-            if(gamepad1.left_stick_x > 0 || gamepad1.left_stick_x < 0){
-                lateral = gamepad1.left_stick_x;
-            }
-            if(gamepad1.right_stick_x != 0){
-                yaw = gamepad1.right_stick_x;
-            }
+//            if(-gamepad1.left_stick_y > 0 || -gamepad1.left_stick_y < 0){
+//                //
+//                axial = -gamepad1.left_stick_y;
+//            }
+//            if(gamepad1.left_stick_x > 0 || gamepad1.left_stick_x < 0){
+//                lateral = gamepad1.left_stick_x;
+//            }
+//            if(gamepad1.right_stick_x != 0){
+//                yaw = gamepad1.right_stick_x;
+//            }
 
-//            axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-//            lateral =  gamepad1.left_stick_x;
-//            yaw     =  gamepad1.right_stick_x;
+            axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
+            lateral =  gamepad1.left_stick_x;
+            yaw     =  gamepad1.right_stick_x;
             boolean intakeCommand = gamepad1.a; //control intake
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
