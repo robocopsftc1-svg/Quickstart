@@ -93,7 +93,7 @@ public class message extends LinearOpMode
                 finalWarned = true;
                 gamepad1.rumbleBlips(3);
             }
-
+            //intake
             if (gamepad1.a) {
                 intake.out();
             } else if (gamepad1.b) {
@@ -101,9 +101,9 @@ public class message extends LinearOpMode
             } else {
                 intake.stop();
             }
-
-            if(gamepad1.left_trigger_pressed){
-                shooter_driver.setPower(-gamepad1.left_trigger);
+            //flywheel
+            if(gamepad1.x){
+                shooter_driver.setPower(1);
             }
             else{
                 shooter_driver.setPower(0);

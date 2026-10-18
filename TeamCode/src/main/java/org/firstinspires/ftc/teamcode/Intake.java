@@ -41,20 +41,21 @@ public class Intake{
 
 
     // Pull pollen in
-    public void in()
+    public void in(DcMotor side)
     {
-        setPower(INTAKE_POWER);
+        setPower(INTAKE_POWER, side);
     }
 
     // Spit pollen out (clears jams).
-    public void out()
+    public void out(DcMotor side)
     {
-        setPower(-REVERSE_POWER);
+        setPower(-REVERSE_POWER, side);
     }
 
     public void stop()
     {
-        setPower(0.0);
+        setPower(0.0, left);
+        setPower(0.0, right);
     }
 
     public double getPower()
@@ -62,10 +63,17 @@ public class Intake{
         return power;
     }
 
-    private void setPower(double p)
+    private void setPower(double p, DcMotor side)
     {
         power = p;
-        left.setPower(p);
-        right.setPower(p);
+        if(side == left){
+            left.setPower(p);
+        }
+        else if(side == right){
+            right.setPower(p);
+        }
+
+//        left.setPower(p);
+//        right.setPower(p);
     }
 }
