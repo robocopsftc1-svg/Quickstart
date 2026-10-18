@@ -28,6 +28,9 @@ public class message extends LinearOpMode
     private DcMotor frontLeft, backLeft, frontRight, backRight;
     private Intake intake;
 
+    private DcMotor intake_right;
+    private DcMotor intake_left;
+
     @Override
     public void runOpMode() {
         frontLeft  = hardwareMap.get(DcMotor.class, HardwareNames.FRONT_LEFT);
@@ -35,7 +38,8 @@ public class message extends LinearOpMode
         frontRight = hardwareMap.get(DcMotor.class, HardwareNames.FRONT_RIGHT);
         backRight  = hardwareMap.get(DcMotor.class, HardwareNames.BACK_RIGHT);
         shooter_driver = hardwareMap.get(DcMotor.class, HardwareNames.SHOOTER_DRIVER);
-
+        intake_left = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_LEFT);
+        intake_right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_LEFT)
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -95,9 +99,12 @@ public class message extends LinearOpMode
             }
             //intake
             if (gamepad1.a) {
-                intake.out();
+                intake_left.out();
+                intake_right.out();
+
             } else if (gamepad1.b) {
-                intake.in();
+                intake_left.in();
+                intake_right.in();
             } else {
                 intake.stop();
             }
