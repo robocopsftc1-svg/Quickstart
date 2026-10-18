@@ -94,9 +94,9 @@ public class message extends LinearOpMode
                 gamepad1.rumbleBlips(3);
             }
 
-            if (gamepad1.b) {
+            if (gamepad1.a) {
                 intake.out();
-            } else if (gamepad1.a) {
+            } else if (gamepad1.b) {
                 intake.in();
             } else {
                 intake.stop();
