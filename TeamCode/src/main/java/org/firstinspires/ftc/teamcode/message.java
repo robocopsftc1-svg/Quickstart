@@ -94,16 +94,16 @@ public class message extends LinearOpMode
                 gamepad1.rumbleBlips(3);
             }
 
-            if (gamepad1.left_trigger > 0.1) {
+            if (gamepad1.b) {
                 intake.out();
-            } else if (gamepad1.right_trigger > 0.1) {
+            } else if (gamepad1.x) {
                 intake.in();
             } else {
                 intake.stop();
             }
 
-            if(gamepad1.left_bumper){
-                shooter_driver.setPower(-1);
+            if(gamepad1.left_trigger_pressed){
+                shooter_driver.setPower(-gamepad1.left_trigger);
             }
             else{
                 shooter_driver.setPower(0);
