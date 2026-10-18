@@ -102,7 +102,7 @@ public class message extends LinearOpMode
                 intake.stop();
             }
 
-            if(gamepad1.right_bumper){
+            if(gamepad1.left_bumper){
                 shooter_driver.setPower(-1);
             }
             else{
