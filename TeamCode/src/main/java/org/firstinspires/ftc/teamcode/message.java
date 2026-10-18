@@ -96,7 +96,7 @@ public class message extends LinearOpMode
 
             if (gamepad1.b) {
                 intake.out();
-            } else if (gamepad1.x) {
+            } else if (gamepad1.a) {
                 intake.in();
             } else {
                 intake.stop();
