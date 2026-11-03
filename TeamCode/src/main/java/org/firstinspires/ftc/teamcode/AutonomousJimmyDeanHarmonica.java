@@ -18,7 +18,7 @@ import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 
-@Autonomous
+@Autonomous (name="Auto", group = "OpMode")
 public class AutonomousJimmyDeanHarmonica extends OpMode {
     //constants
     private Follower follower;
