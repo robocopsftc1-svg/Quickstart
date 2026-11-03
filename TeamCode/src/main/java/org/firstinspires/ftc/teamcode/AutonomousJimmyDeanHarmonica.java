@@ -11,6 +11,13 @@ import com.pedropathing.paths.Path;
 import com.pedropathing.ivy.Scheduler;
 import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
+
+import com.pedropathing.ivy.Command;
+import com.pedropathing.ivy.Scheduler;
+import static com.pedropathing.ivy.Scheduler.schedule;
+import static com.pedropathing.ivy.groups.Groups.sequential;
+import static com.pedropathing.ivy.pedro.PedroCommands.follow;
+
 @Autonomous
 public class AutonomousJimmyDeanHarmonica extends OpMode {
     //constants
@@ -21,14 +28,25 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
     //example poses
     private final Pose startPose = p.of(24,24,0);
     private final Pose park = p.of(48,48,90);
-
+    //necessary for curve
     private final Pose controlPose = p.of(36, 60, 45);
     //note to self points entered as follows
     //p.of(x,y,heading);
-
+    //our actual paths made from poses
     private Path park(){
         return line(startPose, park).linear(startPose, park);//line
         //return curve(startPose, controlPose, park).linear(startPose, park); //bezier curve
+    }
+    private Path move(){
+        return line(park, startPose).linear(park, startPose);
+    }
+    //command
+    private Command autoRoutine() {
+        return sequential(
+                follow(follower, move()),
+                // Add mechanism commands here.
+                follow(follower, park())
+        );
     }
 
     @Override
@@ -37,11 +55,12 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
         follower.setPose(startPose);
+        follower.update();
     }
     @Override
     public void start(){
         //
-        schedule(follow(follower, park()));
+        schedule(autoRoutine());
     }
     @Override
     public void loop(){
