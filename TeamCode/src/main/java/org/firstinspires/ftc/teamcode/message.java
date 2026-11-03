@@ -62,9 +62,9 @@ public class message extends LinearOpMode
         runtime.reset();
 
         while (opModeIsActive()) {
-            double axial   = -gamepad1.left_stick_y;
-            double lateral =  gamepad1.left_stick_x;
-            double yaw     =  gamepad1.right_stick_x;
+            double axial   = Math.pow(-gamepad1.left_stick_y, 3);
+            double lateral =  Math.pow(gamepad1.left_stick_x, 3);
+            double yaw     =  Math.pow(gamepad1.right_stick_x, 3);
 
             double flPower = axial + lateral + yaw;
             double frPower = axial - lateral - yaw;
@@ -110,9 +110,9 @@ public class message extends LinearOpMode
             }
             //flywheel
             if(gamepad1.x){
-                shooter_driver.setPower(1);
+                shooter_driver.setPower(-0.3834);
             }
-            else{
+            if(gamepad1.x && shooter_driver.getPower() < 0){
                 shooter_driver.setPower(0);
             }
 
