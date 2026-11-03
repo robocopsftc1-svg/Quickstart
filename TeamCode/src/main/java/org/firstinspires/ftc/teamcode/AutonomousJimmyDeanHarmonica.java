@@ -28,6 +28,7 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
     //example poses
     private final Pose startPose = p.of(24,24,0);
     private final Pose park = p.of(48,48,90);
+    private final Pose scorePose = p.of(48, 48, 90);
     //necessary for curve
     private final Pose controlPose = p.of(36, 60, 45);
     //note to self points entered as follows
@@ -37,14 +38,15 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
         return line(startPose, park).linear(startPose, park);//line
         //return curve(startPose, controlPose, park).linear(startPose, park); //bezier curve
     }
-    private Path move(){
-        return line(park, startPose).linear(park, startPose);
+    private Path startToScore() {
+        return line(startPose, scorePose).linear(startPose, scorePose);
     }
     //command
     private Command autoRoutine() {
         return sequential(
-                follow(follower, move()),
+                follow(follower, startToScore()),
                 // Add mechanism commands here.
+
                 follow(follower, park())
         );
     }
@@ -67,6 +69,14 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
         //
         follower.update();
         Scheduler.execute();
+
+
+
+        telemetry.addData("X", follower.pose().x());
+        telemetry.addData("Y", follower.pose().y());
+        telemetry.addData("Heading", Math.toDegrees(follower.pose().heading()));
+        telemetry.addData("Follower Mode", follower.mode());
+        telemetry.update();
     }
 
 }
