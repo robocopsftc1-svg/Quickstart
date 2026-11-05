@@ -1,19 +1,55 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.HardwareNames;
+
+
+//intake structure
+//the intake spins up the outer/inner stage (left and right)
+//intake takes in ball
+//ball is in intake until the stopper is opened (servo)
+
+
+//states
+//START
+//BALL_INTAKE
+//BALL_WAIT
+//BALL_DEPLOY
+//STOP
+//BALL_EXPEND (outtake)
+
+
+//note to self
+//period of stopper is 0.522 seconds
+//so, 90 degrees is 0.1305 seconds
+
 public class Intake
 {
-
+    ElapsedTime stopperTimer = new ElapsedTime();
     public static final double INTAKE_POWER  = 1;
     public static final double REVERSE_POWER = 1;
+
+    public enum IntakeState {
+        START,
+        BALL_INTAKE,
+        //BALL_WAIT,
+        BALL_DEPLOY,
+        BALL_EXPEND,
+
+    }
+    public IntakeState currentState = IntakeState.START;
+
+
 
     private static final DcMotorSimple.Direction LEFT_DIRECTION  = DcMotorSimple.Direction.REVERSE;
     private static final DcMotorSimple.Direction RIGHT_DIRECTION = DcMotorSimple.Direction.FORWARD;
 
+    private final CRServo stopper;
     private final DcMotor left;
     private final DcMotor right;
     private double power = 0.0;
@@ -22,7 +58,7 @@ public class Intake
     {
         left  = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_LEFT);
         right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);
-
+        stopper = hardwareMap.get(CRServo.class, HardwareNames.STOPPER);
         left.setDirection(LEFT_DIRECTION);
         right.setDirection(RIGHT_DIRECTION);
 
@@ -67,4 +103,65 @@ public class Intake
     {
         setPowers(p, p);
     }
+
+    //now we have the FSM loop to be able to cycle the system
+    public void update(){
+        //
+        switch (currentState){
+            //
+            case START:
+                left.setPower(0);
+                right.setPower(0);
+                stopper.setPower(0);
+            case BALL_INTAKE:
+                left.setPower(INTAKE_POWER);
+                right.setPower(INTAKE_POWER);
+            case BALL_DEPLOY:
+                left.setPower(INTAKE_POWER);
+                right.setPower(INTAKE_POWER);
+
+                //now we have to add stopper logic
+
+
+                //open
+                stopperTimer.reset();
+                stopper.setPower(1);
+                if(stopperTimer.seconds() >= 0.1305){
+                    stopper.setPower(0);
+                }
+                stopperTimer.reset();
+
+                //close
+                if(stopperTimer.seconds() >= 5){
+                    stopperTimer.reset();
+                    stopper.setPower(-1);
+                    if(stopperTimer.seconds() >= 0.1305){
+                        stopper.setPower(0);
+                    }
+                }
+            case BALL_EXPEND:
+                left.setPower(-REVERSE_POWER);
+                right.setPower(-REVERSE_POWER);
+                //open
+                stopperTimer.reset();
+                stopper.setPower(1);
+                if(stopperTimer.seconds() >= 0.1305){
+                    stopper.setPower(0);
+                }
+                stopperTimer.reset();
+
+                //close
+                if(stopperTimer.seconds() >= 5){
+                    stopperTimer.reset();
+                    stopper.setPower(-1);
+                    if(stopperTimer.seconds() >= 0.1305){
+                        stopper.setPower(0);
+                    }
+                }
+
+
+        }
+    }
+
+
 }

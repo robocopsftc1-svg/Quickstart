@@ -11,7 +11,7 @@ import com.pedropathing.paths.Path;
 import com.pedropathing.ivy.Scheduler;
 import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
-
+import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 import com.pedropathing.ivy.Command;
 import com.pedropathing.ivy.Scheduler;
 import static com.pedropathing.ivy.Scheduler.schedule;
@@ -22,6 +22,7 @@ import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 public class AutonomousJimmyDeanHarmonica extends OpMode {
     //constants
     private Follower follower;
+    private Intake intakeMachine;
     private final PoseFactory p = PoseFactory.degrees();
 
     //poses (points that are used to crate points to go from a to b)
@@ -61,6 +62,7 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
         follower = Constants.create(hardwareMap);
         follower.setPose(startPose);
         follower.update();
+        intakeMachine = new Intake(hardwareMap);
     }
     @Override
     public void start(){
@@ -72,7 +74,7 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
         //
         follower.update();
         Scheduler.execute();
-
+        intakeMachine.update();
 
 
         telemetry.addData("X", follower.pose().x());

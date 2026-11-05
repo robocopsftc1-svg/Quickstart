@@ -17,6 +17,8 @@ public final class HardwareNames {
     public static final String INTAKE_LEFT  = "intake_left";
     public static final String INTAKE_RIGHT = "intake_right";
 
+    public static final String STOPPER = "stopper";
+
     // TODO: add shooter names here when the robot has them
 
     public static final String SHOOTER_DRIVER = "shooter_driver"; //temporary for the fixed angle shooter
