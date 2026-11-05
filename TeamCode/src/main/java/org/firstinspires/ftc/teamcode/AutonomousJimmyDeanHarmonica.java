@@ -26,9 +26,9 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
 
     //poses (points that are used to crate points to go from a to b)
     //example poses
-    private final Pose startPose = p.of(24,24,0);
-    private final Pose park = p.of(48,48,90);
-    private final Pose scorePose = p.of(48, 48, 90);
+    private final Pose startPose = p.of(84.7,132.3,270);
+    private final Pose park = p.of(84.7,132.3,90);
+    private final Pose scorePose = p.of(84.08, 101.26, 270);
     //necessary for curve
     private final Pose controlPose = p.of(36, 60, 45);
     //note to self points entered as follows
@@ -40,6 +40,9 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
     }
     private Path startToScore() {
         return line(startPose, scorePose).linear(startPose, scorePose);
+    }
+    private Path scoreToPark() {
+        return line(scorePose, park).linear(scorePose, park);
     }
     //command
     private Command autoRoutine() {
