@@ -48,8 +48,16 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
     //command
     private Command autoRoutine() {
         return sequential(
+
+
                 follow(follower, startToScore()),
                 // Add mechanism commands here.
+                //
+
+
+
+
+
 
                 follow(follower, park())
         );
