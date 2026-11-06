@@ -28,7 +28,7 @@ public class message extends LinearOpMode
     private DcMotor frontLeft, backLeft, frontRight, backRight;
     private Intake intake;
 
-    private DcMotor intake_right;
+    //private DcMotor intake_right;
     private DcMotor intake_left;
 
     @Override
@@ -39,7 +39,7 @@ public class message extends LinearOpMode
         backRight  = hardwareMap.get(DcMotor.class, HardwareNames.BACK_RIGHT);
         shooter_driver = hardwareMap.get(DcMotor.class, HardwareNames.SHOOTER_DRIVER);
         intake_left = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_LEFT);
-        intake_right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);
+       // intake_right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);

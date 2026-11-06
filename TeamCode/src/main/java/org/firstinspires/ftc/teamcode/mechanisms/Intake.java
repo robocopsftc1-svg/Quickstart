@@ -13,7 +13,8 @@ import org.firstinspires.ftc.teamcode.HardwareNames;
 //the intake spins up the outer/inner stage (left and right)
 //intake takes in ball
 //ball is in intake until the stopper is opened (servo)
-
+//addendum
+//now only one motor. we'll just call it "left"
 
 //states
 //START
@@ -51,18 +52,18 @@ public class Intake
 
     private final CRServo stopper;
     private final DcMotor left;
-    private final DcMotor right;
+    //private final DcMotor right;
     private double power = 0.0;
 
     public Intake(HardwareMap hardwareMap)
     {
         left  = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_LEFT);
-        right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);
+        //right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);
         stopper = hardwareMap.get(CRServo.class, HardwareNames.STOPPER);
         left.setDirection(LEFT_DIRECTION);
-        right.setDirection(RIGHT_DIRECTION);
+        //right.setDirection(RIGHT_DIRECTION);
 
-        for (DcMotor m: new DcMotor[]{left, right})
+        for (DcMotor m: new DcMotor[]{left})
         {
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
             m.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -95,7 +96,7 @@ public class Intake
     public void setPowers(double leftPower, double rightPower)
     {
         left.setPower(leftPower);
-        right.setPower(rightPower);
+        //right.setPower(rightPower);
         power = Math.abs(leftPower) >= Math.abs(rightPower) ? leftPower : rightPower;
     }
 
@@ -111,14 +112,14 @@ public class Intake
             //
             case START:
                 left.setPower(0);
-                right.setPower(0);
+                //right.setPower(0);
                 stopper.setPower(0);
             case BALL_INTAKE:
                 left.setPower(INTAKE_POWER);
-                right.setPower(INTAKE_POWER);
+                //right.setPower(INTAKE_POWER);
             case BALL_DEPLOY:
                 left.setPower(INTAKE_POWER);
-                right.setPower(INTAKE_POWER);
+                //right.setPower(INTAKE_POWER);
 
                 //now we have to add stopper logic
 
@@ -141,7 +142,7 @@ public class Intake
                 }
             case BALL_EXPEND:
                 left.setPower(-REVERSE_POWER);
-                right.setPower(-REVERSE_POWER);
+                //right.setPower(-REVERSE_POWER);
                 //open
                 stopperTimer.reset();
                 stopper.setPower(1);

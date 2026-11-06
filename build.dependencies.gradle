@@ -17,5 +17,10 @@ dependencies {
     implementation 'com.pedropathing.ivy:pedro:1.1.1'
     implementation 'com.pedropathing:revhub:3.0.1'
     implementation 'com.pedropathing:tuning:1.0.1'
-    implementation "com.arcrobotics:ftclib:2.1.1"
+    // Core SolversLib utility
+    implementation "org.solverslib:core:0.3.5"
+
+    // Optional integrations (Uncomment if needed)
+    // implementation "org.solverslib:pedroPathing:0.3.5"
+    // implementation "org.solverslib:photon:0.3.5"
 }
