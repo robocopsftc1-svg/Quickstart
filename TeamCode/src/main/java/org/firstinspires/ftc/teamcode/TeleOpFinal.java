@@ -128,7 +128,7 @@ public class TeleOpFinal extends LinearOpMode
                 //stopper.setPosition(0);
             }
             if(gamepad1.right_trigger_pressed){
-                stopper.setPosition(0);
+                stopper.setPosition(0.15);
             }
             else{
                 stopper.setPosition(0.47);
