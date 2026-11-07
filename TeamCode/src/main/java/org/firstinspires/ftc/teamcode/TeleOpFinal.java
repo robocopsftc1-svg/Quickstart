@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 
 @TeleOp(name = "Drive", group = "TeleOp")
-public class message extends LinearOpMode
+public class TeleOpFinal extends LinearOpMode
 {
 
     private static final double SLOW_MODE_SCALE = 0.35;
