@@ -9,7 +9,7 @@ public class CRServoDemo extends OpMode {
     private CRServo servo;
     public void init(){
         //
-        servo = hardwareMap.get(CRServo.class, "servo");
+        servo = hardwareMap.get(CRServo.class, HardwareNames.STOPPER);
     }
     public void start(){
         //
