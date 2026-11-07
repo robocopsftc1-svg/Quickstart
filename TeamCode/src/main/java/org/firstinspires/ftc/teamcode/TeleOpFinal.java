@@ -34,7 +34,7 @@ public class TeleOpFinal extends LinearOpMode
     private DcMotor intake_left;
 
     private Servo stopper;
-
+//
     @Override
     public void runOpMode() {
         frontLeft  = hardwareMap.get(DcMotor.class, HardwareNames.FRONT_LEFT);
