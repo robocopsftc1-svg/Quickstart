@@ -6,7 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import com.qualcomm.robotcore.hardware.ServoImplEx;
+import com.qualcomm.robotcore.hardware.PwmControl;
 import org.firstinspires.ftc.teamcode.HardwareNames;
 
 
@@ -62,6 +63,7 @@ public class Intake
         left  = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_LEFT);
         //right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);
         stopper = hardwareMap.get(Servo.class, HardwareNames.STOPPER);
+        ((ServoImplEx) stopper).setPwmRange(new PwmControl.PwmRange(500, 2500));
         left.setDirection(LEFT_DIRECTION);
         //right.setDirection(RIGHT_DIRECTION);
 

@@ -131,7 +131,7 @@ public class TeleOpFinal extends LinearOpMode
                 shooter_driver_two.setPower(0);
                 //stopper.setPosition(0);
             }
-            if(gamepad1.dpad_up){
+            if(gamepad1.right_trigger_pressed){
                 stopper.setPosition(0.3);
             }
             else{
