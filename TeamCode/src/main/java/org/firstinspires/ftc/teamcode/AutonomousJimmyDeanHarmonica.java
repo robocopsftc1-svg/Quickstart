@@ -10,20 +10,29 @@ import static com.pedropathing.api.Paths.*;
 import com.pedropathing.paths.Path;
 import com.pedropathing.ivy.Scheduler;
 import static com.pedropathing.ivy.Scheduler.schedule;
+import static com.pedropathing.ivy.commands.Commands.instant;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 import com.pedropathing.ivy.Command;
 import com.pedropathing.ivy.Scheduler;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import org.firstinspires.ftc.teamcode.mechanisms.Shooter;
 import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
+import static com.pedropathing.ivy.commands.Commands.*;
 
 @Autonomous (name="Auto", group = "OpMode")
 public class AutonomousJimmyDeanHarmonica extends OpMode {
     //constants
     private Follower follower;
+    private Shooter shooterMachine;
+    ElapsedTime runtime = new ElapsedTime();
     private Intake intakeMachine;
     private final PoseFactory p = PoseFactory.degrees();
+
+
+
 
     //poses (points that are used to crate points to go from a to b)
     //example poses
@@ -49,13 +58,16 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
     private Command autoRoutine() {
         return sequential(
 
-
+                instant(() -> intakeMachine.currentState = Intake.IntakeState.START),
+                instant(() -> shooterMachine.currentShooterState = Shooter.ShooterState.HOLD),
                 follow(follower, startToScore()),
                 // Add mechanism commands here.
                 //
-
-
-
+                instant(() -> shooterMachine.currentShooterState = Shooter.ShooterState.FIRE),
+                instant(() -> intakeMachine.currentState = Intake.IntakeState.BALL_DEPLOY),
+                waitMs(5000),
+                instant(() -> intakeMachine.currentState = Intake.IntakeState.START),
+                instant(() -> shooterMachine.currentShooterState = Shooter.ShooterState.STOP),
 
 
 
@@ -71,6 +83,8 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
         follower.setPose(startPose);
         follower.update();
         intakeMachine = new Intake(hardwareMap);
+        shooterMachine = new Shooter(hardwareMap);
+        Command pause = waitMs(500);
     }
     @Override
     public void start(){
@@ -83,7 +97,7 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
         follower.update();
         Scheduler.execute();
         intakeMachine.update();
-
+        shooterMachine.update();
 
         telemetry.addData("X", follower.pose().x());
         telemetry.addData("Y", follower.pose().y());
