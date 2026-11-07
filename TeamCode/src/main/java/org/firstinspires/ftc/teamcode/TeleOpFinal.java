@@ -4,13 +4,19 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import com.qualcomm.robotcore.hardware.ServoImplEx;
+import com.qualcomm.robotcore.hardware.PwmControl;
 
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 
 @TeleOp(name = "Drive", group = "TeleOp")
-public class message extends LinearOpMode
+public class TeleOpFinal extends LinearOpMode
 {
+    boolean stopperEnable = true;
+
 
     private static final double SLOW_MODE_SCALE = 0.35;
 
@@ -27,10 +33,13 @@ public class message extends LinearOpMode
 
     private DcMotor frontLeft, backLeft, frontRight, backRight;
     private Intake intake;
+    private DcMotor shooter_driver_two;
 
-    private DcMotor intake_right;
+    //private DcMotor intake_right;
     private DcMotor intake_left;
 
+    private Servo stopper;
+//
     @Override
     public void runOpMode() {
         frontLeft  = hardwareMap.get(DcMotor.class, HardwareNames.FRONT_LEFT);
@@ -38,14 +47,17 @@ public class message extends LinearOpMode
         frontRight = hardwareMap.get(DcMotor.class, HardwareNames.FRONT_RIGHT);
         backRight  = hardwareMap.get(DcMotor.class, HardwareNames.BACK_RIGHT);
         shooter_driver = hardwareMap.get(DcMotor.class, HardwareNames.SHOOTER_DRIVER);
+        shooter_driver_two = hardwareMap.get(DcMotor.class, "shooter_two");
         intake_left = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_LEFT);
-        intake_right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);
+        stopper = hardwareMap.get(Servo.class, HardwareNames.STOPPER);
+        ((ServoImplEx) stopper).setPwmRange(new PwmControl.PwmRange(500, 2500));
+       // intake_right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
         backRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
-
+        stopper.setPosition(0.45);
         shooter_driver.setDirection(DcMotorSimple.Direction.FORWARD);
         for (DcMotor m : new DcMotor[]{frontLeft, backLeft, frontRight, backRight}) {
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -62,9 +74,9 @@ public class message extends LinearOpMode
         runtime.reset();
 
         while (opModeIsActive()) {
-            double axial   = -gamepad1.left_stick_y;
-            double lateral =  gamepad1.left_stick_x;
-            double yaw     =  gamepad1.right_stick_x;
+            double axial   = Math.pow(-gamepad1.left_stick_y, 3);
+            double lateral =  Math.pow(gamepad1.left_stick_x, 3);
+            double yaw     =  Math.pow(gamepad1.right_stick_x, 3);
 
             double flPower = axial + lateral + yaw;
             double frPower = axial - lateral - yaw;
@@ -102,6 +114,7 @@ public class message extends LinearOpMode
                 intake.out();
                 //intake.out();
 
+
             } else if (gamepad1.b) {
                 intake.in();
                 //intake.in();
@@ -110,10 +123,35 @@ public class message extends LinearOpMode
             }
             //flywheel
             if(gamepad1.x){
-                shooter_driver.setPower(1);
+                shooter_driver.setPower(0.45);
+                shooter_driver_two.setPower(0.7);
+                //stopper.setPosition(0.47);
+
+            }
+            if(gamepad1.x && shooter_driver.getPower() > 0){
+                shooter_driver.setPower(0);
+                shooter_driver_two.setPower(0);
+                //stopper.setPosition(0);
+            }
+            if(gamepad1.right_trigger_pressed){
+                runtime.reset();
+
+
+//                if(runtime.seconds() > 5){
+//                    stopper.setPosition(0);
+//
+//                }
+                stopper.setPosition(0);
+
             }
             else{
-                shooter_driver.setPower(0);
+                runtime.reset();
+
+
+                if(runtime.milliseconds() > 15) {
+                    stopper.setPosition(0.45);
+                }
+                //stopperEnable = true;
             }
 
 
@@ -122,6 +160,7 @@ public class message extends LinearOpMode
             telemetry.addData("Intake power", "%.2f", intake.getPower());
             telemetry.addData("Front L/R", "%.2f, %.2f", flPower * scale, frPower * scale);
             telemetry.addData("Back  L/R", "%.2f, %.2f", blPower * scale, brPower * scale);
+            telemetry.addData("Stopper angle:" ,"%.2f", stopper.getPosition());
             telemetry.update();
         }
     }
