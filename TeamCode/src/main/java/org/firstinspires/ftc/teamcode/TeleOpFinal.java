@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 @TeleOp(name = "Drive", group = "TeleOp")
 public class TeleOpFinal extends LinearOpMode
 {
-
+    boolean stopperEnable = true;
     private static final double SLOW_MODE_SCALE = 0.35;
 
     // Match timing (seconds). Teleop is 2:00; flowers open with 60 s left.
@@ -55,7 +55,7 @@ public class TeleOpFinal extends LinearOpMode
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
         backRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        stopper.setPosition(0);
+        stopper.setPosition(0.4);
         shooter_driver.setDirection(DcMotorSimple.Direction.FORWARD);
         for (DcMotor m : new DcMotor[]{frontLeft, backLeft, frontRight, backRight}) {
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -131,11 +131,13 @@ public class TeleOpFinal extends LinearOpMode
                 shooter_driver_two.setPower(0);
                 //stopper.setPosition(0);
             }
-            if(gamepad1.right_trigger_pressed){
-                stopper.setPosition(0.3);
+            if(gamepad1.right_trigger_pressed || stopper.getPosition() == 0){
+                stopper.setPosition(0);
+
             }
-            else{
-                stopper.setPosition(0.57);
+            else if(gamepad1.right_trigger_pressed || stopper.getPosition() > 0){
+                stopper.setPosition(0.4);
+                //stopperEnable = true;
             }
 
 
