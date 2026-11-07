@@ -76,7 +76,7 @@ public class Intake
     public void in()
     {
         setPower(INTAKE_POWER);
-        stopper.setPosition(0);
+        //stopper.setPosition(0);
 
         stopperTimer.reset();
         if(stopperTimer.seconds() > 5){
@@ -88,7 +88,7 @@ public class Intake
     public void out()
     {
         setPower(-REVERSE_POWER);
-        stopper.setPosition(0);
+        //stopper.setPosition(0);
 
         stopperTimer.reset();
         if(stopperTimer.seconds() > 5){
