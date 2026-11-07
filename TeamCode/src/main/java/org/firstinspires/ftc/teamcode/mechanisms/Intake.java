@@ -76,17 +76,30 @@ public class Intake
     public void in()
     {
         setPower(INTAKE_POWER);
+        stopper.setPosition(0);
+
+        stopperTimer.reset();
+        if(stopperTimer.seconds() > 5){
+            stopper.setPosition(0.3);
+        }
     }
 
     // Spit pollen out (clears jams).
     public void out()
     {
         setPower(-REVERSE_POWER);
+        stopper.setPosition(0);
+
+        stopperTimer.reset();
+        if(stopperTimer.seconds() > 5){
+            stopper.setPosition(0.3);
+        }
     }
 
     public void stop()
     {
         setPower(0.0);
+        stopper.setPosition(0.3);
     }
 
     public double getPower()

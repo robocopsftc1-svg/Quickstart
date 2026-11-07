@@ -102,6 +102,7 @@ public class TeleOpFinal extends LinearOpMode
                 intake.out();
                 //intake.out();
 
+
             } else if (gamepad1.b) {
                 intake.in();
                 //intake.in();
