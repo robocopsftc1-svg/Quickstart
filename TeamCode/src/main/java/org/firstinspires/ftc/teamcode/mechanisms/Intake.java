@@ -80,7 +80,7 @@ public class Intake
 
         stopperTimer.reset();
         if(stopperTimer.seconds() > 5){
-            stopper.setPosition(0.47);
+            stopper.setPosition(-0.47);
         }
     }
 
@@ -92,14 +92,14 @@ public class Intake
 
         stopperTimer.reset();
         if(stopperTimer.seconds() > 5){
-            stopper.setPosition(0.47);
+            stopper.setPosition(-0.47);
         }
     }
 
     public void stop()
     {
         setPower(0.0);
-        stopper.setPosition(0.47);
+        stopper.setPosition(-0.47);
     }
 
     public double getPower()
@@ -127,7 +127,7 @@ public class Intake
             //
             case START:
                 left.setPower(0);
-                stopper.setPosition(0.47);
+                stopper.setPosition(-0.47);
                 //right.setPower(0);
 
             case BALL_INTAKE:
@@ -142,7 +142,7 @@ public class Intake
 
                 //open
 
-                stopper.setPosition(0.37);
+                stopper.setPosition(-0.37);
 
                 stopperTimer.reset();
 
@@ -157,7 +157,7 @@ public class Intake
                 //right.setPower(-REVERSE_POWER);
                 //open
                 //stopperTimer.reset();
-                stopper.setPosition(0.37);
+                stopper.setPosition(-0.37);
 
                 //stopperTimer.reset();
 
@@ -165,7 +165,7 @@ public class Intake
 
 
             case STOP:
-                stopper.setPosition(0.47);
+                stopper.setPosition(-0.47);
                 left.setPower(0);
         }
     }
