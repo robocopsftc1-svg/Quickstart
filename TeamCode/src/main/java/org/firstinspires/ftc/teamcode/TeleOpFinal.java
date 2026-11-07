@@ -28,6 +28,7 @@ public class TeleOpFinal extends LinearOpMode
 
     private DcMotor frontLeft, backLeft, frontRight, backRight;
     private Intake intake;
+    private DcMotor shooter_driver_two;
 
     //private DcMotor intake_right;
     private DcMotor intake_left;
@@ -41,6 +42,7 @@ public class TeleOpFinal extends LinearOpMode
         frontRight = hardwareMap.get(DcMotor.class, HardwareNames.FRONT_RIGHT);
         backRight  = hardwareMap.get(DcMotor.class, HardwareNames.BACK_RIGHT);
         shooter_driver = hardwareMap.get(DcMotor.class, HardwareNames.SHOOTER_DRIVER);
+        shooter_driver_two = hardwareMap.get(DcMotor.class, "shooter_two");
         intake_left = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_LEFT);
         stopper = hardwareMap.get(Servo.class, HardwareNames.STOPPER);
        // intake_right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);
@@ -116,11 +118,13 @@ public class TeleOpFinal extends LinearOpMode
             //flywheel
             if(gamepad1.x){
                 shooter_driver.setPower(-0.3834);
+                shooter_driver_two.setPower(-0.3834);
                 stopper.setPosition(0);
 
             }
             if(gamepad1.x && shooter_driver.getPower() < 0){
                 shooter_driver.setPower(0);
+                shooter_driver_two.setPower(0);
                 stopper.setPosition(0.37);
             }
 

@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.HardwareNames;
 //fire
 //stop
 public class Shooter {
-    public static final double SHOOTER_POWER = 1;
+    public static final double SHOOTER_POWER = -0.3834;
     private static final DcMotorSimple.Direction SHOOTER_DRIVER = DcMotorSimple.Direction.FORWARD;
     private static final DcMotorSimple.Direction SHOOTER_SPIN = DcMotorSimple.Direction.FORWARD;
     public enum ShooterState {
@@ -26,12 +26,14 @@ public class Shooter {
     }
     public ShooterState currentShooterState = ShooterState.HOLD;
     private DcMotor shooter_driver;
+    private DcMotor shooter_driver_two;
     private DcMotor shooter_spin;
     private double power = 0.0;
 
 
     public Shooter(HardwareMap hardwareMap){
         shooter_driver = hardwareMap.get(DcMotor.class, HardwareNames.SHOOTER_DRIVER);
+        shooter_driver_two = hardwareMap.get(DcMotor.class, "second_shooter");
         shooter_spin = hardwareMap.get(DcMotor.class, HardwareNames.SHOOTER_SPIN);
     }
 
@@ -46,10 +48,14 @@ public class Shooter {
             case HOLD:
                 //
                 shooter_driver.setPower(0);
+                shooter_driver_two.setPower(0);
             case FIRE:
                 shooter_driver.setPower(SHOOTER_POWER);
+                shooter_driver_two.setPower(-SHOOTER_POWER);
             case STOP:
                 shooter_driver.setPower(0);
+                shooter_driver_two.setPower(0);
+
         }
     }
 }
