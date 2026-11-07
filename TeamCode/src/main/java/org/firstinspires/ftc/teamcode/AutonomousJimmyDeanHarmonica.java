@@ -66,7 +66,7 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
                 instant(() -> shooterMachine.currentShooterState = Shooter.ShooterState.FIRE),
                 instant(() -> intakeMachine.currentState = Intake.IntakeState.BALL_DEPLOY),
                 waitMs(5000),
-                instant(() -> intakeMachine.currentState = Intake.IntakeState.START),
+                instant(() -> intakeMachine.currentState = Intake.IntakeState.STOP),
                 instant(() -> shooterMachine.currentShooterState = Shooter.ShooterState.STOP),
 
 

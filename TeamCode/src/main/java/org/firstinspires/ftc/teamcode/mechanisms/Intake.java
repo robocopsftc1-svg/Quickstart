@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.HardwareNames;
@@ -41,6 +42,7 @@ public class Intake
         //BALL_WAIT,
         BALL_DEPLOY,
         BALL_EXPEND,
+        STOP
 
     }
     public IntakeState currentState = IntakeState.START;
@@ -50,7 +52,7 @@ public class Intake
     private static final DcMotorSimple.Direction LEFT_DIRECTION  = DcMotorSimple.Direction.REVERSE;
     private static final DcMotorSimple.Direction RIGHT_DIRECTION = DcMotorSimple.Direction.FORWARD;
 
-    private final CRServo stopper;
+    private final Servo stopper;
     private final DcMotor left;
     //private final DcMotor right;
     private double power = 0.0;
@@ -59,7 +61,7 @@ public class Intake
     {
         left  = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_LEFT);
         //right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);
-        stopper = hardwareMap.get(CRServo.class, HardwareNames.STOPPER);
+        stopper = hardwareMap.get(Servo.class, HardwareNames.STOPPER);
         left.setDirection(LEFT_DIRECTION);
         //right.setDirection(RIGHT_DIRECTION);
 
@@ -112,8 +114,9 @@ public class Intake
             //
             case START:
                 left.setPower(0);
+                stopper.setPosition(0.3);
                 //right.setPower(0);
-                stopper.setPower(0);
+
             case BALL_INTAKE:
                 left.setPower(INTAKE_POWER);
                 //right.setPower(INTAKE_POWER);
@@ -125,42 +128,32 @@ public class Intake
 
 
                 //open
-                stopperTimer.reset();
-                stopper.setPower(1);
-                if(stopperTimer.seconds() >= 0.1305){
-                    stopper.setPower(0);
-                }
+
+                stopper.setPosition(0);
+
                 stopperTimer.reset();
 
                 //close
                 if(stopperTimer.seconds() >= 5){
                     stopperTimer.reset();
-                    stopper.setPower(-1);
-                    if(stopperTimer.seconds() >= 0.1305){
-                        stopper.setPower(0);
-                    }
+                    stopper.setPosition(0.3);
+
                 }
             case BALL_EXPEND:
                 left.setPower(-REVERSE_POWER);
                 //right.setPower(-REVERSE_POWER);
                 //open
-                stopperTimer.reset();
-                stopper.setPower(1);
-                if(stopperTimer.seconds() >= 0.1305){
-                    stopper.setPower(0);
-                }
-                stopperTimer.reset();
+                //stopperTimer.reset();
+                stopper.setPosition(0);
+
+                //stopperTimer.reset();
 
                 //close
-                if(stopperTimer.seconds() >= 5){
-                    stopperTimer.reset();
-                    stopper.setPower(-1);
-                    if(stopperTimer.seconds() >= 0.1305){
-                        stopper.setPower(0);
-                    }
-                }
 
 
+            case STOP:
+                stopper.setPosition(0.3);
+                left.setPower(0);
         }
     }
 
