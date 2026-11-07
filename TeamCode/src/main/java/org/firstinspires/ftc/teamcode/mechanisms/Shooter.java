@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.HardwareNames;
 //fire
 //stop
 public class Shooter {
-    public static final double SHOOTER_POWER = 0.3834;
+    public static final double SHOOTER_POWER = 1;
     private static final DcMotorSimple.Direction SHOOTER_DRIVER = DcMotorSimple.Direction.FORWARD;
     private static final DcMotorSimple.Direction SHOOTER_SPIN = DcMotorSimple.Direction.FORWARD;
     public enum ShooterState {
