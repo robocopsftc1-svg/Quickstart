@@ -51,7 +51,7 @@ public class Shooter {
                 shooter_driver_two.setPower(0);
             case FIRE:
                 shooter_driver.setPower(SHOOTER_POWER);
-                shooter_driver_two.setPower(-1);
+                shooter_driver_two.setPower(1);
             case STOP:
                 shooter_driver.setPower(0);
                 shooter_driver_two.setPower(0);

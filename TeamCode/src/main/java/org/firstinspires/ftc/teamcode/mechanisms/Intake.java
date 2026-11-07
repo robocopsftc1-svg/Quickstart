@@ -147,11 +147,11 @@ public class Intake
                 stopperTimer.reset();
 
                 //close
-                if(stopperTimer.seconds() >= 5){
-                    stopperTimer.reset();
-                    stopper.setPosition(0.47);
-
-                }
+//                if(stopperTimer.seconds() >= 5){
+//                    stopperTimer.reset();
+//                    stopper.setPosition(0.47);
+//
+//                }
             case BALL_EXPEND:
                 left.setPower(-REVERSE_POWER);
                 //right.setPower(-REVERSE_POWER);
