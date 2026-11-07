@@ -140,6 +140,7 @@ public class TeleOpFinal extends LinearOpMode
             telemetry.addData("Intake power", "%.2f", intake.getPower());
             telemetry.addData("Front L/R", "%.2f, %.2f", flPower * scale, frPower * scale);
             telemetry.addData("Back  L/R", "%.2f, %.2f", blPower * scale, brPower * scale);
+            telemetry.addData("Stopper angle: %.2f", stopper.getPosition());
             telemetry.update();
         }
     }
