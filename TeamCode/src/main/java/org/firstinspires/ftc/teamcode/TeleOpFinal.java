@@ -117,8 +117,8 @@ public class TeleOpFinal extends LinearOpMode
             }
             //flywheel
             if(gamepad1.x){
-                shooter_driver.setPower(0.8);
-                shooter_driver_two.setPower(-0.8);
+                shooter_driver.setPower(0.75);
+                shooter_driver_two.setPower(-1);
                 stopper.setPosition(0);
 
             }
