@@ -57,7 +57,7 @@ public class TeleOpFinal extends LinearOpMode
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
         backRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        stopper.setPosition(0);
+        stopper.setPosition(0.45);
         shooter_driver.setDirection(DcMotorSimple.Direction.FORWARD);
         for (DcMotor m : new DcMotor[]{frontLeft, backLeft, frontRight, backRight}) {
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -137,22 +137,16 @@ public class TeleOpFinal extends LinearOpMode
                 runtime.reset();
 
 
-                if(runtime.seconds() > 5){
-                    System.out.println("hello world");
-
-                }
-                stopper.setPosition(0.4);
+//                if(runtime.seconds() > 5){
+//                    stopper.setPosition(0);
+//
+//                }
+                stopper.setPosition(0);
 
             }
             else{
-                runtime.reset();
-
-
-                if(runtime.seconds() > 5){
-                    System.out.println("hello world");
-
-                }
-                stopper.setPosition(0);
+                stopper.setPosition(0.45);
+                //stopperEnable = true;
             }
 
 
