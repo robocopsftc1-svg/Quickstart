@@ -142,7 +142,7 @@ public class Intake
 
                 //open
 
-                stopper.setPosition(0.15);
+                stopper.setPosition(0.37);
 
                 stopperTimer.reset();
 
@@ -157,7 +157,7 @@ public class Intake
                 //right.setPower(-REVERSE_POWER);
                 //open
                 //stopperTimer.reset();
-                stopper.setPosition(0.15);
+                stopper.setPosition(0.37);
 
                 //stopperTimer.reset();
 
