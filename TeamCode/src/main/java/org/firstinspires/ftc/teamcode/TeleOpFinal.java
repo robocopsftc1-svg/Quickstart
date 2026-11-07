@@ -145,7 +145,12 @@ public class TeleOpFinal extends LinearOpMode
 
             }
             else{
-                stopper.setPosition(0.45);
+                runtime.reset();
+
+
+                if(runtime.milliseconds() > 15) {
+                    stopper.setPosition(0.45);
+                }
                 //stopperEnable = true;
             }
 
