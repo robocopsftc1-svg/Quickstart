@@ -7,6 +7,9 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import com.qualcomm.robotcore.hardware.ServoImplEx;
+import com.qualcomm.robotcore.hardware.PwmControl;
+
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 
 @TeleOp(name = "Drive", group = "TeleOp")
@@ -45,13 +48,14 @@ public class TeleOpFinal extends LinearOpMode
         shooter_driver_two = hardwareMap.get(DcMotor.class, "shooter_two");
         intake_left = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_LEFT);
         stopper = hardwareMap.get(Servo.class, HardwareNames.STOPPER);
+        ((ServoImplEx) stopper).setPwmRange(new PwmControl.PwmRange(500, 2500));
        // intake_right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
         backRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
-
+        stopper.setPosition(0);
         shooter_driver.setDirection(DcMotorSimple.Direction.FORWARD);
         for (DcMotor m : new DcMotor[]{frontLeft, backLeft, frontRight, backRight}) {
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -117,8 +121,8 @@ public class TeleOpFinal extends LinearOpMode
             }
             //flywheel
             if(gamepad1.x){
-                shooter_driver.setPower(0.55);
-                shooter_driver_two.setPower(1);
+                shooter_driver.setPower(0.45);
+                shooter_driver_two.setPower(0.7);
                 //stopper.setPosition(0.47);
 
             }
@@ -127,11 +131,11 @@ public class TeleOpFinal extends LinearOpMode
                 shooter_driver_two.setPower(0);
                 //stopper.setPosition(0);
             }
-            if(gamepad1.right_trigger_pressed){
-                //stopper.setPosition(0);
+            if(gamepad1.dpad_up){
+                stopper.setPosition(0.3);
             }
             else{
-                stopper.setPosition(0);
+                stopper.setPosition(0.57);
             }
 
 
@@ -140,7 +144,7 @@ public class TeleOpFinal extends LinearOpMode
             telemetry.addData("Intake power", "%.2f", intake.getPower());
             telemetry.addData("Front L/R", "%.2f, %.2f", flPower * scale, frPower * scale);
             telemetry.addData("Back  L/R", "%.2f, %.2f", blPower * scale, brPower * scale);
-            telemetry.addData("Stopper angle: %.2f", stopper.getPosition());
+            telemetry.addData("Stopper angle:" ,"%.2f", stopper.getPosition());
             telemetry.update();
         }
     }
