@@ -14,16 +14,14 @@ import static com.pedropathing.ivy.commands.Commands.instant;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 import com.pedropathing.ivy.Command;
-import com.pedropathing.ivy.Scheduler;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.mechanisms.Shooter;
 import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.groups.Groups.sequential;
-import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import static com.pedropathing.ivy.commands.Commands.*;
 
 @Autonomous (name="Auto", group = "OpMode")
-public class AutonomousJimmyDeanHarmonica extends OpMode {
+public class AutonomousSimple extends OpMode {
     //constants
     private Follower follower;
     private Shooter shooterMachine;
@@ -39,6 +37,8 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
     private final Pose startPose = p.of(84.7,132.3,270);
     private final Pose park = p.of(84.7,132.3,90);
     private final Pose scorePose = p.of(84.08, 101.26, 270);
+
+    private final Pose avoidance = p.of(113.45,102.86,270);
     //necessary for curve
     private final Pose controlPose = p.of(36, 60, 45);
     //note to self points entered as follows
@@ -51,8 +51,18 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
     private Path startToScore() {
         return line(startPose, scorePose).linear(startPose, scorePose);
     }
-    private Path scoreToPark() {
-        return line(scorePose, park).linear(scorePose, park);
+
+    private Path updatedCorrectPath(){
+        return line(startPose, avoidance).linear(startPose, avoidance);
+    }
+    private Path avoidanceToScore(){
+        return line(avoidance, scorePose).linear(avoidance, scorePose);
+    }
+    private Path avoidanceToPark() {
+        return line(avoidance, park).linear(avoidance, park);
+    }
+    private Path scoreToAvoidance(){
+        return line(scorePose, avoidance).linear(scorePose, avoidance);
     }
     //command
     private Command autoRoutine() {
@@ -60,7 +70,8 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
 
                 instant(() -> intakeMachine.currentState = Intake.IntakeState.START),
                 instant(() -> shooterMachine.currentShooterState = Shooter.ShooterState.HOLD),
-                follow(follower, startToScore()),
+                follow(follower, updatedCorrectPath()),
+                follow(follower, avoidanceToScore()),
                 // Add mechanism commands here.
                 //
                 instant(() -> shooterMachine.currentShooterState = Shooter.ShooterState.FIRE),
@@ -71,7 +82,8 @@ public class AutonomousJimmyDeanHarmonica extends OpMode {
 
 
 
-                follow(follower, park())
+                follow(follower, scoreToAvoidance()),
+                follow(follower, avoidanceToPark())
         );
     }
 
