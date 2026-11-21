@@ -53,6 +53,9 @@ public class Intake
     private static final DcMotorSimple.Direction LEFT_DIRECTION  = DcMotorSimple.Direction.REVERSE;
     private static final DcMotorSimple.Direction RIGHT_DIRECTION = DcMotorSimple.Direction.FORWARD;
 
+    public final Servo ramp_left;
+    public final Servo ramp_right;
+
     private final Servo stopper;
     private final DcMotor left;
     //private final DcMotor right;
@@ -65,6 +68,9 @@ public class Intake
         stopper = hardwareMap.get(Servo.class, HardwareNames.STOPPER);
         ((ServoImplEx) stopper).setPwmRange(new PwmControl.PwmRange(500, 2500));
         left.setDirection(LEFT_DIRECTION);
+        ramp_left=hardwareMap.get(Servo.class, HardwareNames.RAMP_LEFT);
+        ramp_right=hardwareMap.get(Servo.class, HardwareNames.RAMP_RIGHT);
+
         //right.setDirection(RIGHT_DIRECTION);
 
         for (DcMotor m: new DcMotor[]{left})
@@ -79,7 +85,7 @@ public class Intake
     {
         setPower(INTAKE_POWER);
         //stopper.setPosition(0);
-
+        //add ramp and stopper positions in the future
         stopperTimer.reset();
         if(stopperTimer.seconds() > 5){
             stopper.setPosition(0.6);

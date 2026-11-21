@@ -19,8 +19,14 @@ public final class HardwareNames {
 
     public static final String STOPPER = "stopper";
 
-    // TODO: add shooter names here when the robot has them
+    //shield
+    public static final String RAMP_LEFT = "ramp_left";
+    public static final String RAMP_RIGHT = "ramp_right";
+    //shooter
 
     public static final String SHOOTER_DRIVER = "shooter_driver"; //temporary for the fixed angle shooter
     public static final String SHOOTER_SPIN = "shooter_spin"; //same as shooter driver in terms of status
+
+    public static final String SHOOTER_LEFTSPIN = "turret_left";
+    public static final String SHOOTER_RIGHTSPIN = "turret_right";
 }

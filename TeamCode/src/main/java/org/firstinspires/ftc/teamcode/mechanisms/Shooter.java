@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 
 import android.health.connect.datatypes.units.Power;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -29,12 +30,15 @@ public class Shooter {
     private DcMotor shooter_driver_two;
     private DcMotor shooter_spin;
     private double power = 0.0;
-
+    private CRServo turret_left;
+    private CRServo turret_right;
 
     public Shooter(HardwareMap hardwareMap){
         shooter_driver = hardwareMap.get(DcMotor.class, HardwareNames.SHOOTER_DRIVER);
         shooter_driver_two = hardwareMap.get(DcMotor.class, "second_shooter");
         shooter_spin = hardwareMap.get(DcMotor.class, HardwareNames.SHOOTER_SPIN);
+        turret_left = hardwareMap.get(CRServo.class, HardwareNames.SHOOTER_LEFTSPIN);
+        turret_right = hardwareMap.get(CRServo.class, HardwareNames.SHOOTER_RIGHTSPIN);
     }
 
     //public void spinShooting() {setPower(SHOOTER_POWER);}
