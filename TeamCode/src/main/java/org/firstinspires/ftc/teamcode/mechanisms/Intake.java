@@ -93,7 +93,7 @@ public class Intake
         setPower(INTAKE_POWER);
         ramp_left.setPosition(OPEN_POSITION);
         ramp_right.setPosition(OPEN_POSITION);
-        //stopper.setPosition(0);
+        stopper.setPosition(CLOSED_POSITION);
         //add ramp and stopper positions in the future
         stopperTimer.reset();
         if(stopperTimer.seconds() > 5){
@@ -105,7 +105,7 @@ public class Intake
     public void out()
     {
         setPower(-REVERSE_POWER);
-        //stopper.setPosition(0);
+        stopper.setPosition(OPEN_POSITION);
         ramp_left.setPosition(OPEN_POSITION);
         ramp_right.setPosition(OPEN_POSITION);
         stopperTimer.reset();
@@ -119,7 +119,7 @@ public class Intake
         setPower(0.0);
         ramp_left.setPosition(CLOSED_POSITION);
         ramp_right.setPosition(CLOSED_POSITION);
-        stopper.setPosition(0.6);
+        stopper.setPosition(CLOSED_POSITION);
     }
 
     public double getPower()
@@ -147,18 +147,19 @@ public class Intake
             //
             case START:
                 left.setPower(0);
-                stopper.setPosition(0.6);
+                stopper.setPosition(CLOSED_POSITION);
                 //right.setPower(0);
 
             case BALL_INTAKE:
                 left.setPower(INTAKE_POWER);
                 ramp_left.setPosition(OPEN_POSITION);
                 ramp_right.setPosition(OPEN_POSITION);
+                stopper.setPosition(CLOSED_POSITION);
                 //right.setPower(INTAKE_POWER);
             case BALL_DEPLOY:
                 left.setPower(INTAKE_POWER);
                 //right.setPower(INTAKE_POWER);
-
+                stopper.setPosition(OPEN_POSITION);
                 //now we have to add stopper logic
 
 
@@ -181,7 +182,7 @@ public class Intake
                 //right.setPower(-REVERSE_POWER);
                 //open
                 //stopperTimer.reset();
-                stopper.setPosition(0.3);
+                stopper.setPosition(OPEN_POSITION);
 
                 //stopperTimer.reset();
 
@@ -191,7 +192,7 @@ public class Intake
             case STOP:
                 ramp_left.setPosition(CLOSED_POSITION);
                 ramp_right.setPosition(CLOSED_POSITION);
-                stopper.setPosition(0.6);
+                stopper.setPosition(CLOSED_POSITION);
                 left.setPower(0);
         }
     }

@@ -17,11 +17,17 @@ public final class HardwareNames {
     public static final String INTAKE_LEFT  = "intake_left";
     public static final String INTAKE_RIGHT = "intake_right";
 
+
+    //stopper
+
     public static final String STOPPER = "stopper";
 
-    //shield
+    //ramp
     public static final String RAMP_LEFT = "ramp_left";
     public static final String RAMP_RIGHT = "ramp_right";
+
+    public static final double CLOSED_POSITION = 0.80;
+    public static final double OPEN_POSITION = 0.90;
     //shooter
 
     public static final String SHOOTER_DRIVER = "shooter_driver"; //temporary for the fixed angle shooter
