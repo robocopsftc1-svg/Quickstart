@@ -37,6 +37,13 @@ public class Intake
     public static final double INTAKE_POWER  = 1;
     public static final double REVERSE_POWER = 0.5;
 
+    public static final double CLOSED_POSITION = 0.80;
+    public static final double OPEN_POSITION = 0.90;
+
+    private static final int PWM_MIN_US = 500;
+    private static final int PWM_MAX_US = 2500;
+
+
     public enum IntakeState {
         START,
         BALL_INTAKE,
@@ -53,6 +60,9 @@ public class Intake
     private static final DcMotorSimple.Direction LEFT_DIRECTION  = DcMotorSimple.Direction.REVERSE;
     private static final DcMotorSimple.Direction RIGHT_DIRECTION = DcMotorSimple.Direction.FORWARD;
 
+    public final Servo ramp_left;
+    public final Servo ramp_right;
+
     private final Servo stopper;
     private final DcMotor left;
     //private final DcMotor right;
@@ -65,6 +75,9 @@ public class Intake
         stopper = hardwareMap.get(Servo.class, HardwareNames.STOPPER);
         ((ServoImplEx) stopper).setPwmRange(new PwmControl.PwmRange(500, 2500));
         left.setDirection(LEFT_DIRECTION);
+        ramp_left=hardwareMap.get(Servo.class, HardwareNames.RAMP_LEFT);
+        ramp_right=hardwareMap.get(Servo.class, HardwareNames.RAMP_RIGHT);
+
         //right.setDirection(RIGHT_DIRECTION);
 
         for (DcMotor m: new DcMotor[]{left})
@@ -78,8 +91,10 @@ public class Intake
     public void in()
     {
         setPower(INTAKE_POWER);
-        //stopper.setPosition(0);
-
+        ramp_left.setPosition(OPEN_POSITION);
+        ramp_right.setPosition(OPEN_POSITION);
+        stopper.setPosition(CLOSED_POSITION);
+        //add ramp and stopper positions in the future
         stopperTimer.reset();
         if(stopperTimer.seconds() > 5){
             stopper.setPosition(0.6);
@@ -90,8 +105,9 @@ public class Intake
     public void out()
     {
         setPower(-REVERSE_POWER);
-        //stopper.setPosition(0);
-
+        stopper.setPosition(OPEN_POSITION);
+        ramp_left.setPosition(OPEN_POSITION);
+        ramp_right.setPosition(OPEN_POSITION);
         stopperTimer.reset();
         if(stopperTimer.seconds() > 5){
             stopper.setPosition(0.6);
@@ -101,7 +117,9 @@ public class Intake
     public void stop()
     {
         setPower(0.0);
-        stopper.setPosition(0.6);
+        ramp_left.setPosition(CLOSED_POSITION);
+        ramp_right.setPosition(CLOSED_POSITION);
+        stopper.setPosition(CLOSED_POSITION);
     }
 
     public double getPower()
@@ -129,16 +147,19 @@ public class Intake
             //
             case START:
                 left.setPower(0);
-                stopper.setPosition(0.6);
+                stopper.setPosition(CLOSED_POSITION);
                 //right.setPower(0);
 
             case BALL_INTAKE:
                 left.setPower(INTAKE_POWER);
+                ramp_left.setPosition(OPEN_POSITION);
+                ramp_right.setPosition(OPEN_POSITION);
+                stopper.setPosition(CLOSED_POSITION);
                 //right.setPower(INTAKE_POWER);
             case BALL_DEPLOY:
                 left.setPower(INTAKE_POWER);
                 //right.setPower(INTAKE_POWER);
-
+                stopper.setPosition(OPEN_POSITION);
                 //now we have to add stopper logic
 
 
@@ -156,10 +177,12 @@ public class Intake
 //                }
             case BALL_EXPEND:
                 left.setPower(-REVERSE_POWER);
+                ramp_left.setPosition(OPEN_POSITION);
+                ramp_right.setPosition(OPEN_POSITION);
                 //right.setPower(-REVERSE_POWER);
                 //open
                 //stopperTimer.reset();
-                stopper.setPosition(0.3);
+                stopper.setPosition(OPEN_POSITION);
 
                 //stopperTimer.reset();
 
@@ -167,7 +190,9 @@ public class Intake
 
 
             case STOP:
-                stopper.setPosition(0.6);
+                ramp_left.setPosition(CLOSED_POSITION);
+                ramp_right.setPosition(CLOSED_POSITION);
+                stopper.setPosition(CLOSED_POSITION);
                 left.setPower(0);
         }
     }
