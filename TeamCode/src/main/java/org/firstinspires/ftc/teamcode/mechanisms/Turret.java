@@ -12,7 +12,8 @@ public class Turret
     public Turret(GoBildaPinpointDriver pinpoint) {
         this.pinpoint = pinpoint;
     }
-    double x=pinpoint.getPosX(DistanceUnit.METER);
+    double x =pinpoint.getPosX(DistanceUnit.METER);//+disance
+
     double y=pinpoint.getPosY(DistanceUnit.METER);
     double heading=pinpoint.getHeading(UnnormalizedAngleUnit.DEGREES);
 
@@ -66,6 +67,9 @@ public class Turret
         double angle = Math.atan(n / d);
         return Math.toDegrees(angle);
     }
+    public void setAngle()
+    {
 
+    }
 
 }
