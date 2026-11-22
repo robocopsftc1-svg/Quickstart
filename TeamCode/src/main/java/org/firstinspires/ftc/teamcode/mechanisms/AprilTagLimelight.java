@@ -13,6 +13,15 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 public class AprilTagLimelight extends OpMode{
     private Limelight3A limelight;
     private IMU imu;
+
+    private double tx;
+    private double ty;
+    private double ta;
+    private double walldistance;
+    private double camAngle;
+    private double stickerHeight = 42;
+
+
     @Override
     public void init(){
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
@@ -33,12 +42,20 @@ public class AprilTagLimelight extends OpMode{
         LLResult llResult = limelight.getLatestResult();
         if(llResult != null && llResult.isValid()){
             Pose3D botpose = llResult.getBotpose_MT2();
+            tx = llResult.getTx();
+            ty = llResult.getTy();
+            ta = llResult.getTa();
             telemetry.addData("Tx", llResult.getTx());
             telemetry.addData("Ty", llResult.getTy());
             telemetry.addData("Ta", llResult.getTa());
             telemetry.addData("botpose", botpose.toString());
             telemetry.addData("Yaw", botpose.getOrientation().getYaw());
+
         }
+        else{
+            telemetry.addData("No April Tag",0);
+        }
+
 
     }
 }
