@@ -8,7 +8,7 @@ public class Flywheel
 {
     private DcMotorEx shooter_driver;
 
-    private double encoderCPM = 162400;
+    private double encoderCPM = 28;
 
     private double gearRatio = 1;
 
