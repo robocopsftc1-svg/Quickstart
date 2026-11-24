@@ -13,4 +13,15 @@ public class deScorer {
         stopper_left = hardwareMap.get(Servo.class, HardwareNames.RAMP_LEFT);
         stopper_right = hardwareMap.get(Servo.class, HardwareNames.RAMP_RIGHT);
     }
+
+
+    public void up(){
+        stopper_left.setPosition(0.3);
+        stopper_right.setPosition(0.3);
+    }
+
+    public void down(){
+        stopper_left.setPosition(0);
+        stopper_right.setPosition(0);
+    }
 }
