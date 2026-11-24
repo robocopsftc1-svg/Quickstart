@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.mechanisms.HardwareNames;
+import org.firstinspires.ftc.teamcode.subsystems.HardwareNames;
 
 //double for setposition: target angle / total angle that servo can turn
 @Autonomous (name="Servo test",group="CRServoDemo")

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.mechanisms.Intake;
+package org.firstinspires.ftc.teamcode.subsystems.Intake;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.hardware.PwmControl;
 
-import org.firstinspires.ftc.teamcode.mechanisms.HardwareNames;
+import org.firstinspires.ftc.teamcode.subsystems.HardwareNames;
 
 
 //intake structure
@@ -45,38 +45,39 @@ public class Intake
 
 
     public enum IntakeState {
-        START,
+        //START,
         BALL_INTAKE,
         //BALL_WAIT,
-        BALL_DEPLOY,
+        //BALL_DEPLOY,
         BALL_EXPEND,
         STOP
 
     }
-    public IntakeState currentState = IntakeState.START;
+    public IntakeState currentState = IntakeState.STOP;
 
 
 
-    private static final DcMotorSimple.Direction LEFT_DIRECTION  = DcMotorSimple.Direction.REVERSE;
+    private static final DcMotorSimple.Direction LEFT_DIRECTION  = DcMotorSimple.Direction.FORWARD;
     private static final DcMotorSimple.Direction RIGHT_DIRECTION = DcMotorSimple.Direction.FORWARD;
 
-    public final Servo ramp_left;
-    public final Servo ramp_right;
+    //public final Servo ramp_left;
+    //public final Servo ramp_right;
 
-    private final Servo stopper;
+    //private final Servo stopper;
     private final DcMotor left;
+    private final DcMotor right;
     //private final DcMotor right;
     private double power = 0.0;
 
     public Intake(HardwareMap hardwareMap)
     {
         left  = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_LEFT);
-        //right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);
-        stopper = hardwareMap.get(Servo.class, HardwareNames.STOPPER);
-        ((ServoImplEx) stopper).setPwmRange(new PwmControl.PwmRange(500, 2500));
-        left.setDirection(LEFT_DIRECTION);
-        ramp_left=hardwareMap.get(Servo.class, HardwareNames.RAMP_LEFT);
-        ramp_right=hardwareMap.get(Servo.class, HardwareNames.RAMP_RIGHT);
+        right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);
+        //stopper = hardwareMap.get(Servo.class, HardwareNames.STOPPER);
+        //((ServoImplEx) stopper).setPwmRange(new PwmControl.PwmRange(500, 2500));
+        right.setDirection(LEFT_DIRECTION);
+        //ramp_left=hardwareMap.get(Servo.class, HardwareNames.RAMP_LEFT);
+        //ramp_right=hardwareMap.get(Servo.class, HardwareNames.RAMP_RIGHT);
 
         //right.setDirection(RIGHT_DIRECTION);
 
@@ -88,38 +89,38 @@ public class Intake
     }
 
     // Pull pollen in
-    public void in()
+    public static void in(DcMotor d)
     {
-        setPower(INTAKE_POWER);
-        ramp_left.setPosition(OPEN_POSITION);
-        ramp_right.setPosition(OPEN_POSITION);
-        stopper.setPosition(CLOSED_POSITION);
+        d.setPower(INTAKE_POWER);
+        //ramp_left.setPosition(OPEN_POSITION);
+        //ramp_right.setPosition(OPEN_POSITION);
+        //stopper.setPosition(CLOSED_POSITION);
         //add ramp and stopper positions in the future
-        stopperTimer.reset();
-        if(stopperTimer.seconds() > 5){
-            stopper.setPosition(0.6);
-        }
+        //stopperTimer.reset();
+       // if(stopperTimer.seconds() > 5){
+            //stopper.setPosition(0.6);
+        //}
     }
 
     // Spit pollen out (clears jams).
-    public void out()
+    public static void out(DcMotor d)
     {
-        setPower(-REVERSE_POWER);
-        stopper.setPosition(OPEN_POSITION);
-        ramp_left.setPosition(OPEN_POSITION);
-        ramp_right.setPosition(OPEN_POSITION);
-        stopperTimer.reset();
-        if(stopperTimer.seconds() > 5){
-            stopper.setPosition(0.6);
-        }
+        d.setPower(-REVERSE_POWER);
+        //stopper.setPosition(OPEN_POSITION);
+        //ramp_left.setPosition(OPEN_POSITION);
+        //ramp_right.setPosition(OPEN_POSITION);
+        //stopperTimer.reset();
+        //if(stopperTimer.seconds() > 5){
+            //stopper.setPosition(0.6);
+        //}
     }
 
     public void stop()
     {
         setPower(0.0);
-        ramp_left.setPosition(CLOSED_POSITION);
-        ramp_right.setPosition(CLOSED_POSITION);
-        stopper.setPosition(CLOSED_POSITION);
+        //ramp_left.setPosition(CLOSED_POSITION);
+        //ramp_right.setPosition(CLOSED_POSITION);
+        //stopper.setPosition(CLOSED_POSITION);
     }
 
     public double getPower()
@@ -141,48 +142,46 @@ public class Intake
     }
 
     //now we have the FSM loop to be able to cycle the system
-    public void update(){
+    public void intakeUpdate(){
         //
         switch (currentState){
             //
-            case START:
-                left.setPower(0);
-                stopper.setPosition(CLOSED_POSITION);
+            //case START:
+                //left.setPower(0);
+                //stopper.setPosition(CLOSED_POSITION);
                 //right.setPower(0);
 
             case BALL_INTAKE:
-                left.setPower(INTAKE_POWER);
-                ramp_left.setPosition(OPEN_POSITION);
-                ramp_right.setPosition(OPEN_POSITION);
-                stopper.setPosition(CLOSED_POSITION);
+                Intake.in(left);
+                Intake.in(right);
+                //stopper.setPosition(CLOSED_POSITION);
                 //right.setPower(INTAKE_POWER);
-            case BALL_DEPLOY:
-                left.setPower(INTAKE_POWER);
-                //right.setPower(INTAKE_POWER);
-                stopper.setPosition(OPEN_POSITION);
-                //now we have to add stopper logic
-
-
-                //open
-
-                stopper.setPosition(0.3);
-
-                stopperTimer.reset();
-
-                //close
-//                if(stopperTimer.seconds() >= 5){
-//                    stopperTimer.reset();
-//                    stopper.setPosition(0.47);
+//            case BALL_DEPLOY:
+//                left.setPower(INTAKE_POWER);
+//                //right.setPower(INTAKE_POWER);
+//                //stopper.setPosition(OPEN_POSITION);
+//                //now we have to add stopper logic
 //
-//                }
+//
+//                //open
+//
+//                //stopper.setPosition(0.3);
+//
+//                stopperTimer.reset();
+//
+//                //close
+////                if(stopperTimer.seconds() >= 5){
+////                    stopperTimer.reset();
+////                    stopper.setPosition(0.47);
+////
+////                }
             case BALL_EXPEND:
-                left.setPower(-REVERSE_POWER);
-                ramp_left.setPosition(OPEN_POSITION);
-                ramp_right.setPosition(OPEN_POSITION);
+                Intake.out(left);
+                Intake.out(right);
                 //right.setPower(-REVERSE_POWER);
                 //open
                 //stopperTimer.reset();
-                stopper.setPosition(OPEN_POSITION);
+                //stopper.setPosition(OPEN_POSITION);
 
                 //stopperTimer.reset();
 
@@ -190,10 +189,10 @@ public class Intake
 
 
             case STOP:
-                ramp_left.setPosition(CLOSED_POSITION);
-                ramp_right.setPosition(CLOSED_POSITION);
-                stopper.setPosition(CLOSED_POSITION);
+
+               // stopper.setPosition(CLOSED_POSITION);
                 left.setPower(0);
+                right.setPower(0);
         }
     }
 

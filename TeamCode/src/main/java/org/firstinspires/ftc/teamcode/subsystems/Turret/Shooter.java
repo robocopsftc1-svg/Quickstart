@@ -1,11 +1,11 @@
-package org.firstinspires.ftc.teamcode.mechanisms.Turret;
+package org.firstinspires.ftc.teamcode.subsystems.Turret;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.mechanisms.HardwareNames;
+import org.firstinspires.ftc.teamcode.subsystems.HardwareNames;
 
 //for now the code should be for the temporary fixed angle shooter with a single motor spinning the wheel out and the turret rotates
 //motor that shoots: shooter_driver

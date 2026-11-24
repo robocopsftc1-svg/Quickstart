@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.TeleOps;
+package org.firstinspires.ftc.teamcode.Testing;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.hardware.PwmControl;
 
-import org.firstinspires.ftc.teamcode.mechanisms.HardwareNames;
-import org.firstinspires.ftc.teamcode.mechanisms.Intake.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.HardwareNames;
+import org.firstinspires.ftc.teamcode.subsystems.Intake.Intake;
 
 @TeleOp(name = "Drive", group = "TeleOp")
 public class TeleOpFinal extends LinearOpMode

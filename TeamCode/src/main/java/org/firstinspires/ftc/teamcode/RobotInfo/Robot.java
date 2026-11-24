@@ -1,11 +1,9 @@
 package org.firstinspires.ftc.teamcode.RobotInfo;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.mechanisms.Intake.Intake;
-import org.firstinspires.ftc.teamcode.mechanisms.Turret.Shooter;
+import org.firstinspires.ftc.teamcode.subsystems.Intake.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.Turret.Shooter;
 
 public class Robot {
     Intake intake;
@@ -16,7 +14,14 @@ public class Robot {
         intake = new Intake(hardwareMap);
         shooter = new Shooter(hardwareMap);
     }
+    //teleop
+    //runintake
 
+    //shoot
+
+    //open/close stopper
+
+    //autonomous
 
 
 }
