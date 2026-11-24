@@ -28,14 +28,12 @@
  */
 
 import com.pedropathing.follower.Follower;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.Intake;
+import org.firstinspires.ftc.teamcode.Testing.IntakeTest;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 /*
@@ -114,7 +112,7 @@ public class tele extends LinearOpMode {
 //        frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
 //        backRightDrive.setDirection(DcMotor.Direction.FORWARD);
 
-        Intake intake = new Intake(hardwareMap);
+        IntakeTest intake = new IntakeTest(hardwareMap);
         // Wait for the game to start (driver presses START)
         telemetry.addData("Status", "Initialized");
         telemetry.update();

@@ -1,17 +1,14 @@
-package org.firstinspires.ftc.teamcode.fwheel;
+package org.firstinspires.ftc.teamcode.mechanisms.Turret.fwheel;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="kV", group="TeleOp")
-public class kVTuner extends OpMode
+@TeleOp (name="kS", group="TeleOP")
+public class kSTuner extends OpMode
 {
     Flywheel flywheel = new Flywheel();
 
-    public static double kV = 0.01;
-
-    public double kS;
-    public double goalRPM = 2700;
+    public static double kS;
 
     double[] increments = {0.000001, 0.00001, 0.0001, 0.001, 0.01};
 
@@ -35,32 +32,21 @@ public class kVTuner extends OpMode
             incrementIdx--;
         }
 
-        if(gamepad1.a)
-        {
-            goalRPM = 2700;
-        }
-        else if(gamepad1.b)
-        {
-            goalRPM = 1500; //temp value
-        }
-
         double currentStep = increments[incrementIdx];
 
         if(gamepad1.dpadUpWasPressed())
         {
-            kV +=currentStep;
+            kS+=currentStep;
         }
         if(gamepad1.dpadDownWasPressed())
         {
-            kV -=currentStep;
+            kS-=currentStep;
         }
 
-        double power = (kV * goalRPM) + kS;
-
-        flywheel.setPower(power);
+        flywheel.setPower(kS);
 
         telemetry.addData("Step", "%.6f", currentStep);
-        telemetry.addData("kV","%.6f", kV);
+        telemetry.addData("kS","%.6f",kS);
         telemetry.addData("RPM",flywheel.getRPM());
         telemetry.addData("Ticks per Sec", flywheel.getTicksPerSec());
     }

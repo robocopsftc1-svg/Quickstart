@@ -1,13 +1,11 @@
-package org.firstinspires.ftc.teamcode.mechanisms;
-
-import android.health.connect.datatypes.units.Power;
+package org.firstinspires.ftc.teamcode.mechanisms.Turret;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.HardwareNames;
+import org.firstinspires.ftc.teamcode.mechanisms.HardwareNames;
 
 //for now the code should be for the temporary fixed angle shooter with a single motor spinning the wheel out and the turret rotates
 //motor that shoots: shooter_driver

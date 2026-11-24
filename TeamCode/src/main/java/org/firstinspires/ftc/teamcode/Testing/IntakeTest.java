@@ -1,14 +1,12 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Testing;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.HardwareNames;
+import org.firstinspires.ftc.teamcode.mechanisms.HardwareNames;
 
-public class Intake{
+public class IntakeTest {
 
     public static final double INTAKE_POWER  = 1;
     public static final double REVERSE_POWER = 1;
@@ -21,7 +19,7 @@ public class Intake{
     private double power = 0.0;
 
 
-    public Intake(HardwareMap hardwareMap)
+    public IntakeTest(HardwareMap hardwareMap)
     {
         left  = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_LEFT);
         right = hardwareMap.get(DcMotor.class, HardwareNames.INTAKE_RIGHT);

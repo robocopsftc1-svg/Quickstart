@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.TeleOps;
 
 import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.Testing.IntakeTest;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 @TeleOp (name = "TeleOP Pedro", group = "Linear OpMode")
@@ -33,7 +34,7 @@ public class TeleOpPedro extends LinearOpMode {
         intakeLeft = hardwareMap.get(DcMotor.class, "intake_left");
         intakeRight = hardwareMap.get(DcMotor.class, "intake_right");
 
-        Intake intake = new Intake(hardwareMap);
+        IntakeTest intake = new IntakeTest(hardwareMap);
         // Wait for the game to start (driver presses START)
         telemetry.addData("Status", "Initialized");
         telemetry.update();

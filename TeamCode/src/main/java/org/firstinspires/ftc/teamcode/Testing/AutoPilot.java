@@ -1,9 +1,6 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Testing;
 
 //import androidx.annotation.InterpolatorRes;
-
-import static org.firstinspires.ftc.teamcode.HardwareNames.INTAKE_LEFT;
-import static org.firstinspires.ftc.teamcode.HardwareNames.INTAKE_RIGHT;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.math.Pose;

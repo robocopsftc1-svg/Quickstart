@@ -1,6 +1,6 @@
 //package org.firstinspires.ftc.teamcode;
 //
-//import org.firstinspires.ftc.teamcode.mechanisms.Intake;
+//import org.firstinspires.ftc.teamcode.mechanisms.Intake.Intake;
 //
 //
 //import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
