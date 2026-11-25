@@ -12,13 +12,17 @@ public class Flywheel
 
     private double gearRatio = 1;
 
-    private double kV,kS,kP;
+    private double kV,kS,kP, MAX_TICKS_PER_SEC;
 
     public Flywheel(HardwareMap hwMap)
     {
         shooter_driver = hwMap.get(DcMotorEx.class, "shooter_driver");
 
         shooter_driver.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        kP = 0.0026;
+        kS = 0.132;
+        MAX_TICKS_PER_SEC = 2437;
+        kV = (1-kS) / MAX_TICKS_PER_SEC;
     }
 
     public void setPower(double power)
