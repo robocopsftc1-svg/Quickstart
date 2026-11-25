@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Intake.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Stopper.Stopper;
 import org.firstinspires.ftc.teamcode.subsystems.Turret.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.deScorer.deScorer;
+import org.firstinspires.ftc.teamcode.subsystems.Turret.fwheel.Flywheel;
 //add flywheel class and pid to that
 public class Robot {
     Intake intake;
@@ -14,7 +15,7 @@ public class Robot {
     deScorer deScorer;
     Stopper stopper;
     CV limelight;
-
+    Flywheel flywheel;
     public enum robotStates {
         STOP,
         SHOOT,
@@ -34,6 +35,7 @@ public class Robot {
         deScorer = new deScorer(hardwareMap);
         stopper = new Stopper(hardwareMap);
         limelight = new CV(hardwareMap);
+        flywheel = new Flywheel(hardwareMap);
 
 
     }
@@ -56,7 +58,7 @@ public class Robot {
         stopper.open();
     }
     public void runFlywheel(){
-        shooter.runFlywheel();
+        flywheel.setMotorRPM(4080);
     }
     //shoot
     public void shoot(){

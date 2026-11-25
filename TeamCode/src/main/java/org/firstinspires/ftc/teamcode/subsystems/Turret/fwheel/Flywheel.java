@@ -14,7 +14,7 @@ public class Flywheel
 
     private double kV,kS,kP;
 
-    public void init(HardwareMap hwMap)
+    public Flywheel(HardwareMap hwMap)
     {
         shooter_driver = hwMap.get(DcMotorEx.class, "shooter_driver");
 
