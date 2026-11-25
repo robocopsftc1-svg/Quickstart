@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Intake.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Stopper.Stopper;
 import org.firstinspires.ftc.teamcode.subsystems.Turret.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.deScorer.deScorer;
-
+//add flywheel class and pid to that
 public class Robot {
     Intake intake;
     Shooter shooter;
