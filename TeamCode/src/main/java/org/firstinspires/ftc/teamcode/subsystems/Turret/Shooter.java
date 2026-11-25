@@ -40,7 +40,7 @@ public class Shooter {
     }
 
     //public void spinShooting() {setPower(SHOOTER_POWER);}
-    private void setPower(){
+    public void runFlywheel(){
         //
         shooter_driver.setPower(SHOOTER_POWER);
     }

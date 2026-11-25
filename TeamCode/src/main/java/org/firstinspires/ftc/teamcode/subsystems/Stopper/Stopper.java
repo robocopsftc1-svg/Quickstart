@@ -17,10 +17,10 @@ public class Stopper {
 
 
     public void open(){
-        stopper.setPosition(0.83);
+        stopper.setPosition(0.971);
     }
 
     public void close(){
-        stopper.setPosition(0.93);
+        stopper.setPosition(1);
     }
 }

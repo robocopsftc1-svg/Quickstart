@@ -89,9 +89,10 @@ public class Intake
     }
 
     // Pull pollen in
-    public static void in(DcMotor d)
+    public void in()
     {
-        d.setPower(INTAKE_POWER);
+        left.setPower(INTAKE_POWER);
+        right.setPower(INTAKE_POWER);
         //ramp_left.setPosition(OPEN_POSITION);
         //ramp_right.setPosition(OPEN_POSITION);
         //stopper.setPosition(CLOSED_POSITION);
@@ -103,9 +104,10 @@ public class Intake
     }
 
     // Spit pollen out (clears jams).
-    public static void out(DcMotor d)
+    public void out()
     {
-        d.setPower(-REVERSE_POWER);
+        left.setPower(-REVERSE_POWER);
+        right.setPower(-REVERSE_POWER);
         //stopper.setPosition(OPEN_POSITION);
         //ramp_left.setPosition(OPEN_POSITION);
         //ramp_right.setPosition(OPEN_POSITION);
@@ -117,7 +119,8 @@ public class Intake
 
     public void stop()
     {
-        setPower(0.0);
+        left.setPower(0);
+        right.setPower(0);
         //ramp_left.setPosition(CLOSED_POSITION);
         //ramp_right.setPosition(CLOSED_POSITION);
         //stopper.setPosition(CLOSED_POSITION);
@@ -125,7 +128,7 @@ public class Intake
 
     public double getPower()
     {
-        return power;
+        return left.getPower();
     }
 
     // Run each side separately (used by IntakeTest to check each motor's direction)
@@ -145,52 +148,22 @@ public class Intake
     public void intakeUpdate(){
         //
         switch (currentState){
-            //
-            //case START:
-                //left.setPower(0);
-                //stopper.setPosition(CLOSED_POSITION);
-                //right.setPower(0);
+
 
             case BALL_INTAKE:
-                Intake.in(left);
-                Intake.in(right);
-                //stopper.setPosition(CLOSED_POSITION);
-                //right.setPower(INTAKE_POWER);
-//            case BALL_DEPLOY:
-//                left.setPower(INTAKE_POWER);
-//                //right.setPower(INTAKE_POWER);
-//                //stopper.setPosition(OPEN_POSITION);
-//                //now we have to add stopper logic
-//
-//
-//                //open
-//
-//                //stopper.setPosition(0.3);
-//
-//                stopperTimer.reset();
-//
-//                //close
-////                if(stopperTimer.seconds() >= 5){
-////                    stopperTimer.reset();
-////                    stopper.setPosition(0.47);
-////
-////                }
+                left.setPower(INTAKE_POWER);
+                right.setPower(INTAKE_POWER);
+
+
             case BALL_EXPEND:
-                Intake.out(left);
-                Intake.out(right);
-                //right.setPower(-REVERSE_POWER);
-                //open
-                //stopperTimer.reset();
-                //stopper.setPosition(OPEN_POSITION);
+                left.setPower(-REVERSE_POWER);
+                right.setPower(-REVERSE_POWER);
 
-                //stopperTimer.reset();
-
-                //close
 
 
             case STOP:
 
-               // stopper.setPosition(CLOSED_POSITION);
+
                 left.setPower(0);
                 right.setPower(0);
         }

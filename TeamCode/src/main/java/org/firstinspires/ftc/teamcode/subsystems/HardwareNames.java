@@ -35,4 +35,7 @@ public final class HardwareNames {
 
     public static final String SHOOTER_LEFTSPIN = "turret_left";
     public static final String SHOOTER_RIGHTSPIN = "turret_right";
+
+    //computer vision
+    public static final String LIMELIGHT = "limelight";
 }
