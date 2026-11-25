@@ -68,14 +68,14 @@ public class AutonomousSimple extends OpMode {
     private Command autoRoutine() {
         return sequential(
 
-                instant(() -> intakeMachine.currentState = Intake.IntakeState.START),
+                //instant(() -> intakeMachine.currentState = Intake.IntakeState.START),
                 instant(() -> shooterMachine.currentShooterState = Shooter.ShooterState.HOLD),
                 follow(follower, updatedCorrectPath()),
                 follow(follower, avoidanceToScore()),
                 // Add mechanism commands here.
                 //
                 instant(() -> shooterMachine.currentShooterState = Shooter.ShooterState.FIRE),
-                instant(() -> intakeMachine.currentState = Intake.IntakeState.BALL_DEPLOY),
+                //instant(() -> intakeMachine.currentState = Intake.IntakeState.BALL_DEPLOY),
                 waitMs(5000),
                 instant(() -> intakeMachine.currentState = Intake.IntakeState.STOP),
                 instant(() -> shooterMachine.currentShooterState = Shooter.ShooterState.STOP),
@@ -108,7 +108,7 @@ public class AutonomousSimple extends OpMode {
         //
         follower.update();
         Scheduler.execute();
-        intakeMachine.update();
+        intakeMachine.intakeUpdate();
         shooterMachine.update();
 
         telemetry.addData("X", follower.pose().x());

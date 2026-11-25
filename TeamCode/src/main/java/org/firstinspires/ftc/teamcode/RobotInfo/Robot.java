@@ -77,6 +77,7 @@ public class Robot {
         switch(currentState){
             case STOP:
                 stopIntake();
+
             case EXPEL:
                 expel();
             case SHOOT:
