@@ -7,12 +7,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.teamcode.RobotInfo.Robot;
-@TeleOp(name="TeleOp", group="TeleOp")
+@TeleOp(name="TeleOpRenewewed", group="TeleOp")
 public class TeleOpRenewed extends LinearOpMode {
     //initialize
 
 
-    Robot robotMachine = new Robot(hardwareMap);
+    Robot robotMachine;
     Follower follower;
     double forward = -gamepad1.left_stick_y;
     double lateral = gamepad1.left_stick_x;
@@ -23,6 +23,8 @@ public class TeleOpRenewed extends LinearOpMode {
     @Override
     public void runOpMode(){
         //init
+
+        robotMachine = new Robot(hardwareMap);
         telemetry.addData("Robot Activated", robotMachine);
         follower = Constants.create(hardwareMap);
 
