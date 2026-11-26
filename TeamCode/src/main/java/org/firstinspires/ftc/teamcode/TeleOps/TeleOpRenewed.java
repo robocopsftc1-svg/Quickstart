@@ -31,7 +31,7 @@ public class TeleOpRenewed extends LinearOpMode {
 
         while(opModeIsActive()){
             //played
-
+            boolean currentY = gamepad1.y;
 
             double forward = -gamepad1.left_stick_y;
             double lateral = -gamepad1.left_stick_x;
@@ -50,18 +50,21 @@ public class TeleOpRenewed extends LinearOpMode {
             if(gamepad1.left_bumper){
                 robotMachine.expel();
             }
+            if(currentY && !lastButtonState){
+                fieldCentric = !lastButtonState;
+            }
+            lastButtonState = fieldCentric;
 
-//            if(gamepad1.y && !fieldCentric){
-//                ManualDrive.fieldCentric(forward, lateral, turn, follower.pose().heading());
-//                fieldCentric = true;
-//
-//            }
-//            if(gamepad1.y && fieldCentric){
-//                follower.manual(forward, lateral, turn);
-//                fieldCentric = false;
-//            }
-//
-            follower.manual(forward,lateral, turn);
+            if(fieldCentric){
+                ManualDrive.fieldCentric(forward, lateral, turn, follower.pose().heading());
+            } else{
+                follower.manual(forward,lateral, turn);
+            }
+
+            //
+
+
+
 
             Pose visionPose = robotMachine.megaTag2(
                     follower.pose().heading(),
