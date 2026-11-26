@@ -23,8 +23,8 @@ public final class HardwareNames {
     public static final String STOPPER = "stopper";
 
     //ramp
-    public static final String RAMP_LEFT = "ramp_left";
-    public static final String RAMP_RIGHT = "ramp_right";
+    public static final String RAMP_LEFT = "sweeper_left";
+    public static final String RAMP_RIGHT = "sweeper_right";
 
     public static final double CLOSED_POSITION = 0.80;
     public static final double OPEN_POSITION = 0.90;

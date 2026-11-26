@@ -14,9 +14,7 @@ public class TeleOpRenewed extends LinearOpMode {
 
     Robot robotMachine;
     Follower follower;
-    double forward = -gamepad1.left_stick_y;
-    double lateral = gamepad1.left_stick_x;
-    double turn = gamepad1.right_stick_x;
+
     boolean fieldCentric = false;
     boolean lastButtonState = false;
 
@@ -33,6 +31,11 @@ public class TeleOpRenewed extends LinearOpMode {
 
         while(opModeIsActive()){
             //played
+
+
+            double forward = -gamepad1.left_stick_y;
+            double lateral = -gamepad1.left_stick_x;
+            double turn = -gamepad1.right_stick_x;
             follower.update();
             robotMachine.runFlywheel();
             robotMachine.startApril();
@@ -48,17 +51,17 @@ public class TeleOpRenewed extends LinearOpMode {
                 robotMachine.expel();
             }
 
-            if(gamepad1.y && !fieldCentric){
-                ManualDrive.fieldCentric(forward, lateral, turn, follower.pose().heading());
-                fieldCentric = true;
-
-            }
-            if(gamepad1.y && fieldCentric){
-                follower.manual(forward, lateral, turn);
-                fieldCentric = false;
-            }
-
-
+//            if(gamepad1.y && !fieldCentric){
+//                ManualDrive.fieldCentric(forward, lateral, turn, follower.pose().heading());
+//                fieldCentric = true;
+//
+//            }
+//            if(gamepad1.y && fieldCentric){
+//                follower.manual(forward, lateral, turn);
+//                fieldCentric = false;
+//            }
+//
+            follower.manual(forward,lateral, turn);
 
             Pose visionPose = robotMachine.megaTag2(
                     follower.pose().heading(),

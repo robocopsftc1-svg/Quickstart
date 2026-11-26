@@ -33,8 +33,8 @@ public class Shooter {
 
     public Shooter(HardwareMap hardwareMap){
         shooter_driver = hardwareMap.get(DcMotor.class, HardwareNames.SHOOTER_DRIVER);
-        shooter_driver_two = hardwareMap.get(DcMotor.class, "second_shooter");
-        shooter_spin = hardwareMap.get(DcMotor.class, HardwareNames.SHOOTER_SPIN);
+        shooter_driver_two = hardwareMap.get(DcMotor.class, "shooter_counter");
+        //shooter_spin = hardwareMap.get(DcMotor.class, HardwareNames.SHOOTER_SPIN);
         turret_left = hardwareMap.get(CRServo.class, HardwareNames.SHOOTER_LEFTSPIN);
         turret_right = hardwareMap.get(CRServo.class, HardwareNames.SHOOTER_RIGHTSPIN);
     }
