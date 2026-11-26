@@ -73,6 +73,10 @@ public class Robot {
         deScorer.up();
     }
 
+    public void startApril(){
+        limelight.scanApril();
+    }
+
     //autonomous
 
     public void robotUpdate(){
