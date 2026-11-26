@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems.CV;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
+import com.pedropathing.math.Pose;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.LLStatus;
@@ -13,6 +14,10 @@ import org.firstinspires.ftc.teamcode.subsystems.HardwareNames;
 public class CV {
     Limelight3A computerVision;
     LLResult result;
+
+    private static final double METERS_TO_INCHES = 39.3701;
+    private static final double FIELD_HALF_SIZE_INCHES = 72.0;
+    private static final double MAX_ANGULAR_VEL_RAD = Math.toRadians(180);
 
     public CV(HardwareMap hardwareMap){
         computerVision = hardwareMap.get(Limelight3A.class, HardwareNames.LIMELIGHT);
@@ -44,5 +49,24 @@ public class CV {
         } else {
             telemetry.addData("Data", "Old (" + staleness + " ms)");
         }
+    }
+
+    public Pose megaTag2(double hdgRad, double angularVelRad){
+        double hdgDeg = Math.toDegrees(hdgRad);
+        if(Math.abs(angularVelRad) > MAX_ANGULAR_VEL_RAD){
+            return null;
+        }
+        LLResult result = computerVision.getLatestResult();
+        if(result == null || !result.isValid()){
+            return null;
+        }
+        Pose3D mt2Pose = result.getBotpose_MT2();
+        if (mt2Pose == null || (mt2Pose.getPosition().x == 0 && mt2Pose.getPosition().y == 0)) {
+            return null;
+        }
+        double pedroX = (mt2Pose.getPosition().x * METERS_TO_INCHES) + FIELD_HALF_SIZE_INCHES;
+        double pedroY = (mt2Pose.getPosition().y * METERS_TO_INCHES) + FIELD_HALF_SIZE_INCHES;
+
+        return new Pose(pedroX, pedroY, hdgRad);
     }
 }

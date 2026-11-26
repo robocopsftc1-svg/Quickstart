@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.TeleOps;
 import com.pedropathing.follower.Follower;
+import com.pedropathing.follower.ManualDrive;
+import com.pedropathing.math.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -15,6 +17,7 @@ public class TeleOpRenewed extends LinearOpMode {
     double forward = -gamepad1.left_stick_y;
     double lateral = gamepad1.left_stick_x;
     double turn = gamepad1.right_stick_x;
+    boolean robotCentric = false;
 
     @Override
     public void runOpMode(){
@@ -27,6 +30,7 @@ public class TeleOpRenewed extends LinearOpMode {
 
         while(opModeIsActive()){
             //played
+            follower.update();
             robotMachine.runFlywheel();
             robotMachine.startApril();
             if(gamepad1.right_bumper){
@@ -40,9 +44,22 @@ public class TeleOpRenewed extends LinearOpMode {
             if(gamepad1.left_bumper){
                 robotMachine.expel();
             }
-            follower.manual(forward, lateral, turn);
-            follower.update();
 
+            if(gamepad1.dpad_up){
+                ManualDrive.fieldCentric(forward, lateral, turn, follower.pose().heading());
+            }
+
+
+            follower.manual(forward, lateral, turn);
+
+            Pose visionPose = robotMachine.megaTag2(
+                    follower.pose().heading(),
+                    follower.velocity().omega
+            );
+
+            if (visionPose != null) {
+                follower.setPose(visionPose);
+            }
         }
     }
 }

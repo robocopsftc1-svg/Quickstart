@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.RobotInfo;
 
+import com.pedropathing.math.Pose;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.subsystems.CV.CV;
@@ -75,6 +76,10 @@ public class Robot {
 
     public void startApril(){
         limelight.scanApril();
+    }
+
+    public Pose megaTag2(double a, double b){
+        return limelight.megaTag2(a,b);
     }
 
     //autonomous
