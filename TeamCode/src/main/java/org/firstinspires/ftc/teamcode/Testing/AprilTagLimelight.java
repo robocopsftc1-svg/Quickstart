@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Testing;
 
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
@@ -7,10 +8,19 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
+import org.firstinspires.ftc.robotcore.external.navigation.UnnormalizedAngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 @TeleOp(name = "AprilTag Limelight Test")
 public class AprilTagLimelight extends OpMode{
+
+    private GoBildaPinpointDriver pinpoint;
+    double x =pinpoint.getPosX(DistanceUnit.METER);//+distance
+
+    double y=pinpoint.getPosY(DistanceUnit.METER);
+    double heading=pinpoint.getHeading(UnnormalizedAngleUnit.DEGREES);
+    private double turn=0;
     private Limelight3A limelight;
     private IMU imu;
 
@@ -55,7 +65,5 @@ public class AprilTagLimelight extends OpMode{
         else{
             telemetry.addData("No April Tag",0);
         }
-
-
     }
 }
