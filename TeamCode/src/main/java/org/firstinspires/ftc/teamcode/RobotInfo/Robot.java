@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.RobotInfo;
 
 import com.pedropathing.math.Pose;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.subsystems.CV.CV;
 import org.firstinspires.ftc.teamcode.subsystems.Intake.Intake;
@@ -17,6 +18,7 @@ public class Robot {
     Stopper stopper;
     CV limelight;
     Flywheel flywheel;
+    ElapsedTime shootCount;
     public enum robotStates {
         STOP,
         SHOOT,
@@ -37,7 +39,7 @@ public class Robot {
         stopper = new Stopper(hardwareMap);
         limelight = new CV(hardwareMap);
         flywheel = new Flywheel(hardwareMap);
-
+        shootCount = new ElapsedTime();
 
     }
     //teleop
@@ -54,6 +56,10 @@ public class Robot {
     public void closeStopper(){
         stopper.close();
     }
+
+    public double getIntakePower(){
+        return intake.getPower();
+    }
     public void expel(){
         intake.out();
         stopper.open();
@@ -64,7 +70,12 @@ public class Robot {
     //shoot
     public void shoot(){
         runIntake();
-        stopper.open();
+
+        shootCount.reset();
+        if(shootCount.seconds() >= 0.5){
+            stopper.open();
+        }
+
     }
     public void flowerCollect(){
         deScorer.down();
@@ -73,6 +84,7 @@ public class Robot {
     public void gateUp(){
         deScorer.up();
     }
+
 
     public void startApril(){
         limelight.scanApril();
@@ -88,17 +100,24 @@ public class Robot {
         switch(currentState){
             case STOP:
                 stopIntake();
+                closeStopper();
+                flowerCollect();
+                break;
 
             case EXPEL:
                 expel();
+                break;
             case SHOOT:
                 shoot();
+                break;
             case FLOWER:
                 flowerCollect();
+                break;
             case INTAKE:
                 runIntake();
                 closeStopper();
                 gateUp();
+                break;
         }
     }
 

@@ -31,19 +31,33 @@ public class TeleOpRenewed extends LinearOpMode {
 
         while(opModeIsActive()){
             //played
+            telemetry.addData("Right Bumper", gamepad1.right_bumper);
+            telemetry.addData("Left Bumper", gamepad1.left_bumper);
+
+            telemetry.addData("Right Trigger", gamepad1.right_trigger);
+            telemetry.addData(
+                    "Intake Power",
+                    robotMachine.getIntakePower()
+            );
+
+
+
+
+
+
             boolean currentY = gamepad1.y;
 
             double forward = -gamepad1.left_stick_y;
             double lateral = -gamepad1.left_stick_x;
             double turn = -gamepad1.right_stick_x;
-            follower.update();
+
             robotMachine.runFlywheel();
             robotMachine.startApril();
             if(gamepad1.right_bumper){
                 robotMachine.runIntake();
             }
 
-            if (gamepad1.right_trigger_pressed) {
+            if (gamepad1.right_trigger > 0.1) {
                 robotMachine.shoot();
             }
 
@@ -51,9 +65,9 @@ public class TeleOpRenewed extends LinearOpMode {
                 robotMachine.expel();
             }
             if(currentY && !lastButtonState){
-                fieldCentric = !lastButtonState;
+                fieldCentric = !fieldCentric;
             }
-            lastButtonState = fieldCentric;
+            lastButtonState = currentY;
 
             if(fieldCentric){
                 ManualDrive.fieldCentric(forward, lateral, turn, follower.pose().heading());
@@ -74,6 +88,8 @@ public class TeleOpRenewed extends LinearOpMode {
             if (visionPose != null) {
                 follower.setPose(visionPose);
             }
+            follower.update();
+            telemetry.update();
         }
     }
 }
